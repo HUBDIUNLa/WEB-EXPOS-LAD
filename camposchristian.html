@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Calibán y la bruja - Christian Campos Bayes</title>
+  <meta name="description" content="Muestra Florecen Pañuelos, Florecen Voces. Propuesta de pañuelo de Christian Campos Bayes." />
+
+  <style>
+    :root {
+      --detalle: #6f234f;
+      --detalle-2: #ec8a2e;
+      --onyx: #2f2830;
+      --card-bg: #fbf2ed;
+      --card-bg-2: #ffffff;
+      --muted: #6d6168;
+      --line: rgba(111, 35, 79, 0.28);
+      --soft-line: rgba(111, 35, 79, 0.14);
+      --shadow: rgba(49, 28, 43, 0.17);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background:
+        linear-gradient(180deg, #f6edf2 0%, #ffffff 46%, #fbf3ea 100%);
+      color: var(--onyx);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.68;
+    }
+
+    .article-page {
+      width: 100%;
+      padding: 48px 18px;
+    }
+
+    .article-container {
+      max-width: 980px;
+      margin: 0 auto;
+    }
+
+    .article-card {
+      position: relative;
+      overflow: hidden;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.94), rgba(251, 242, 237, 0.98)),
+        var(--card-bg);
+      border: 1px solid var(--line);
+      box-shadow: 0 22px 60px var(--shadow);
+      padding: clamp(28px, 5vw, 64px);
+    }
+
+    .article-card::before {
+      content: "";
+      position: absolute;
+      inset: 0 0 auto 0;
+      height: 9px;
+      background: linear-gradient(90deg, var(--detalle), var(--detalle-2));
+    }
+
+    .article-kicker {
+      margin: 0 0 18px;
+      color: var(--detalle);
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .article-title {
+      max-width: 860px;
+      margin: 0;
+      color: var(--onyx);
+      font-size: clamp(1.35rem, 3vw, 2.7rem);
+      line-height: 1;
+      font-weight: 800;
+      letter-spacing: 0;
+    }
+
+    .article-author {
+      margin: 22px 0 0;
+      color: var(--detalle);
+      font-size: clamp(1rem, 2vw, 1.24rem);
+      font-weight: 700;
+    }
+
+    .article-meta {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin: 28px 0 0;
+    }
+
+    .meta-item {
+      padding: 14px 16px;
+      background: rgba(255, 255, 255, 0.76);
+      border: 1px solid var(--soft-line);
+    }
+
+    .meta-label {
+      display: block;
+      color: var(--detalle);
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .meta-value {
+      display: block;
+      margin-top: 4px;
+      color: var(--onyx);
+      font-size: 0.96rem;
+      font-weight: 700;
+      line-height: 1.35;
+    }
+
+    .article-divider {
+      width: 100%;
+      height: 1px;
+      margin: 34px 0;
+      background: linear-gradient(90deg, var(--detalle), var(--line), transparent);
+    }
+
+    .article-intro {
+      margin: 0;
+      max-width: 800px;
+      color: var(--onyx);
+      font-size: clamp(1.05rem, 1.6vw, 1.22rem);
+      line-height: 1.75;
+    }
+
+    .article-index {
+      margin: 38px 0;
+      padding: 22px;
+      background: rgba(255, 255, 255, 0.72);
+      border: 1px solid var(--soft-line);
+      border-left: 5px solid var(--detalle);
+    }
+
+    .article-index h2 {
+      margin: 0 0 14px;
+      color: var(--detalle);
+      font-size: 0.86rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .article-index ul {
+      display: grid;
+      gap: 8px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .article-index a {
+      color: var(--onyx);
+      font-size: 0.98rem;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .article-index a::before {
+      content: "-";
+      color: var(--detalle);
+      margin-right: 8px;
+    }
+
+    .article-index a:hover {
+      color: var(--detalle);
+      text-decoration: underline;
+      text-underline-offset: 4px;
+    }
+
+    .article-content {
+      display: grid;
+      gap: 34px;
+    }
+
+    .article-section {
+      scroll-margin-top: 28px;
+    }
+
+    .article-section h2 {
+      margin: 0 0 16px;
+      padding-bottom: 10px;
+      color: var(--detalle);
+      border-bottom: 1px solid var(--line);
+      font-size: clamp(1.22rem, 2vw, 1.6rem);
+      line-height: 1.2;
+      font-weight: 800;
+      letter-spacing: 0;
+    }
+
+    .article-section p {
+      margin: 0 0 18px;
+      color: var(--onyx);
+      font-size: 1.02rem;
+    }
+
+    .article-section p:last-child {
+      margin-bottom: 0;
+    }
+
+    .quote-box {
+      margin: 28px 0;
+      padding: 24px;
+      background: rgba(111, 35, 79, 0.07);
+      border-left: 5px solid var(--detalle);
+      color: var(--onyx);
+      font-size: 1.05rem;
+      font-style: italic;
+      line-height: 1.75;
+    }
+
+    .gallery-box {
+      margin-top: 8px;
+      padding: 28px;
+      background: var(--card-bg-2);
+      border: 1px solid var(--line);
+      border-top: 5px solid var(--detalle);
+      scroll-margin-top: 28px;
+    }
+
+    .gallery-box h2 {
+      margin: 0 0 18px;
+      color: var(--detalle);
+      font-size: 1.1rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .gallery-item {
+      margin: 0;
+      background: #ffffff;
+      border: 1px solid var(--soft-line);
+    }
+
+    .gallery-item img {
+      display: block;
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      background: #f6f1ea;
+    }
+
+    .gallery-item:first-child img {
+      object-fit: contain;
+      padding: 10px;
+      background: #0f0a12;
+    }
+
+    .gallery-item figcaption {
+      padding: 12px 14px;
+      color: var(--muted);
+      font-size: 0.9rem;
+      font-weight: 700;
+      line-height: 1.35;
+    }
+
+    .student-box {
+      display: grid;
+      grid-template-columns: 150px 1fr;
+      gap: 22px;
+      align-items: center;
+      margin-top: 20px;
+      padding: 22px;
+      background: rgba(255, 255, 255, 0.82);
+      border: 1px solid var(--soft-line);
+    }
+
+    .student-photo {
+      width: 150px;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      border: 4px solid var(--detalle);
+      background: #ffffff;
+      box-shadow: 0 10px 26px rgba(49, 28, 43, 0.16);
+    }
+
+    .student-box p {
+      margin: 0;
+      color: var(--onyx);
+      font-size: 1rem;
+    }
+
+    .article-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      margin-top: 34px;
+    }
+
+    .article-button {
+      appearance: none;
+      border: 1px solid var(--detalle);
+      background: var(--detalle);
+      color: #ffffff;
+      cursor: pointer;
+      padding: 12px 18px;
+      font: inherit;
+      font-size: 0.82rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: background 160ms ease, color 160ms ease, transform 160ms ease;
+    }
+
+    .article-button:hover {
+      background: transparent;
+      color: var(--detalle);
+      transform: translateY(-1px);
+    }
+
+    @media (max-width: 760px) {
+      .article-meta,
+      .gallery-grid,
+      .student-box {
+        grid-template-columns: 1fr;
+      }
+
+      .student-photo {
+        width: 140px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .article-page {
+        padding: 22px 12px;
+      }
+
+      .article-card {
+        padding: 30px 20px;
+      }
+
+      .article-index,
+      .gallery-box {
+        padding: 18px;
+      }
+
+      .student-box {
+        padding: 18px;
+      }
+
+      .article-actions {
+        justify-content: stretch;
+      }
+
+      .article-button {
+        width: 100%;
+      }
+    }
+
+    @media print {
+      body {
+        background: #ffffff;
+      }
+
+      .article-page {
+        padding: 0;
+      }
+
+      .article-card {
+        box-shadow: none;
+        border: none;
+      }
+
+      .article-actions {
+        display: none;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="article-page">
+    <div class="article-container">
+      <article class="article-card">
+
+        <p class="article-kicker">Muestra</p>
+
+        <h1 class="article-title">
+          Calibán y la bruja
+        </h1>
+
+        <p class="article-author">
+          Christian Campos Bayes
+        </p>
+
+        <div class="article-meta" aria-label="Datos de la propuesta">
+          <div class="meta-item">
+            <span class="meta-label">Muestra</span>
+            <span class="meta-value">Florecen Pañuelos, Florecen Voces</span>
+          </div>
+
+          <div class="meta-item">
+            <span class="meta-label">Asignatura</span>
+            <span class="meta-value">Taller de Diseño III, orientación Textil</span>
+          </div>
+
+          <div class="meta-item">
+            <span class="meta-label">Docentes</span>
+            <span class="meta-value">Daniela Tosar, Cecilia Dorado y Natalia López</span>
+          </div>
+
+          <div class="meta-item">
+            <span class="meta-label">Técnica</span>
+            <span class="meta-value">Estampado por sublimación</span>
+          </div>
+        </div>
+
+        <div class="article-divider"></div>
+
+        <p class="article-intro">
+          A partir de la lectura de “Calibán y la bruja”, el pañuelo reflexiona sobre los saberes femeninos perseguidos,
+          la memoria colectiva y aquello que logró sobrevivir a pesar del fuego.
+        </p>
+
+        <nav class="article-index" aria-label="Índice del artículo">
+          <h2>Índice</h2>
+          <ul>
+            <li><a href="#propuesta">La propuesta del pañuelo</a></li>
+            <li><a href="#fuego">Lo que perdimos en el fuego</a></li>
+            <li><a href="#circulo">Comunidad, ausencia y memoria</a></li>
+            <li><a href="#simbolos">Raíces, ciclos y diversidad</a></li>
+            <li><a href="#reflexion">Reflexión de la actividad</a></li>
+            <li><a href="#galeria">Galería del pañuelo</a></li>
+          </ul>
+        </nav>
+
+        <div class="article-content">
+
+          <section id="propuesta" class="article-section">
+            <h2>La propuesta del pañuelo</h2>
+
+            <p>
+              El desarrollo del pañuelo parte de la lectura de “Calibán y la bruja”, de Silvia Federici, una obra que
+              analiza la caza de brujas como un proceso de persecución y disciplinamiento de las mujeres durante la
+              transición al capitalismo.
+            </p>
+
+            <p>
+              Desde esa investigación, la propuesta reflexiona sobre los saberes femeninos históricamente
+              deslegitimados, perseguidos o eliminados: conocimientos vinculados al cuidado, la medicina popular, la
+              relación con la naturaleza y las formas comunitarias de organización.
+            </p>
+          </section>
+
+          <section id="fuego" class="article-section">
+            <h2>Lo que perdimos en el fuego</h2>
+
+            <p>
+              Durante el proceso apareció el concepto de “lo que perdimos en el fuego”. El fuego funciona como metáfora
+              de la violencia ejercida sobre las mujeres y sobre sus conocimientos, pero también como un elemento de
+              transformación.
+            </p>
+
+            <p>
+              La intención no fue representar únicamente la destrucción, sino pensar aquello que logró sobrevivir y
+              permanecer en la memoria colectiva a pesar de los intentos de erradicarlo.
+            </p>
+          </section>
+
+          <section id="circulo" class="article-section">
+            <h2>Comunidad, ausencia y memoria</h2>
+
+            <p>
+              Visualmente, el diseño está construido a partir de una composición circular de figuras femeninas. Esta
+              organización simboliza la comunidad, el encuentro y la transmisión de conocimientos entre mujeres.
+            </p>
+
+            <p>
+              Las figuras rodean un vacío central que representa la ausencia dejada por las persecuciones históricas y
+              por los saberes silenciados o perdidos. Esa ausencia se vuelve tan significativa como las presencias:
+              permite visualizar aquello que ya no está, pero cuya huella continúa existiendo.
+            </p>
+          </section>
+
+          <section id="simbolos" class="article-section">
+            <h2>Raíces, ciclos y diversidad</h2>
+
+            <p>
+              Alrededor del círculo aparecen llamas que remiten al fuego de las persecuciones, pero también a la
+              transformación y la resistencia. Los elementos lunares aluden a los ciclos naturales y a la conexión
+              histórica de las mujeres con la observación de la naturaleza.
+            </p>
+
+            <p>
+              El marco de raíces representa memoria, vínculos y permanencia. Aunque permanecen ocultas bajo la
+              superficie, las raíces continúan conectando y sosteniendo la vida, del mismo modo que estos saberes
+              persisten en la cultura y la memoria colectiva.
+            </p>
+
+            <p>
+              La paleta cromática refuerza la idea de diversidad: los distintos colores de las figuras femeninas
+              representan la continuidad entre experiencias, identidades y generaciones.
+            </p>
+          </section>
+
+          <section id="reflexion" class="article-section">
+            <h2>Reflexión de la actividad</h2>
+
+            <div class="quote-box">
+              Un diseño no se limita únicamente a una resolución estética: también puede transmitir conceptos, generar
+              preguntas y proponer nuevas formas de interpretar la realidad.
+            </div>
+
+            <p>
+              El proyecto permitió profundizar en el valor de la investigación como parte fundamental del proceso
+              proyectual y comprender la importancia de construir una propuesta visual sustentada en un marco
+              conceptual sólido.
+            </p>
+
+            <p>
+              La pieza materializa una reflexión sobre aquello que fue perseguido y silenciado, pero también sobre la
+              capacidad de las comunidades para conservar y transmitir conocimientos a través del tiempo.
+            </p>
+          </section>
+
+          <section id="galeria" class="gallery-box">
+            <h2>Galería del pañuelo</h2>
+
+            <div class="gallery-grid">
+              <figure class="gallery-item">
+                <img src="assets/images/campos-christian-panuelo-abierto.png" alt="Pañuelo abierto Calibán y la bruja con figuras femeninas, fuego, raíces y lunas" />
+                <figcaption>Pañuelo abierto completo</figcaption>
+              </figure>
+
+              <figure class="gallery-item">
+                <img src="assets/images/campos-christian-panuelo-muneca.jpeg" alt="Pañuelo Calibán y la bruja usado en la muñeca" />
+                <figcaption>Modo de uso: muñeca</figcaption>
+              </figure>
+
+              <figure class="gallery-item">
+                <img src="assets/images/campos-christian-panuelo-espalda.jpeg" alt="Pañuelo Calibán y la bruja usado sobre la espalda" />
+                <figcaption>Modo de uso: espalda</figcaption>
+              </figure>
+
+              <figure class="gallery-item">
+                <img src="assets/images/campos-christian-retrato.jpeg" alt="Retrato de Christian Campos Bayes" />
+                <figcaption>Estudiante: Christian Campos Bayes</figcaption>
+              </figure>
+            </div>
+
+            <div class="student-box">
+              <img src="assets/images/campos-christian-retrato.jpeg" alt="Retrato de Christian Campos Bayes" class="student-photo" />
+              <p>
+                Propuesta realizada por Christian Campos Bayes en el marco de Taller de Diseño III, orientación Textil,
+                junto con el LAD (Laboratorio de Diseño).
+              </p>
+            </div>
+          </section>
+
+        </div>
+
+        <div class="article-actions">
+          <button class="article-button" type="button" onclick="window.print()">
+            Imprimir / Guardar PDF
+          </button>
+        </div>
+
+      </article>
+    </div>
+  </main>
+
+  <script>
+    document.querySelectorAll('a[href^="#"]').forEach(function (link) {
+      link.addEventListener("click", function (event) {
+        var target = document.querySelector(this.getAttribute("href"));
+        if (!target) return;
+
+        event.preventDefault();
+        target.scrollIntoView({
+          behavior: "smooth",
+          block: "start"
+        });
+      });
+    });
+  </script>
+</body>
+</html>

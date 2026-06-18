@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>La lucha entre: la vida y la muerte - Joaquin Kozlowski</title>
+  <meta name="description" content="Muestra Florecen Pañuelos, Florecen Voces. Propuesta de pañuelo de Joaquin Fernando Kozlowski." />
+
+  <style>
+    :root {
+      --detalle: #151515;
+      --detalle-2: #c8c8c8;
+      --onyx: #252525;
+      --card-bg: #f5f2ed;
+      --card-bg-2: #ffffff;
+      --muted: #666666;
+      --line: rgba(21, 21, 21, 0.28);
+      --soft-line: rgba(21, 21, 21, 0.13);
+      --shadow: rgba(20, 20, 20, 0.16);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background:
+        linear-gradient(180deg, #f1f1ee 0%, #ffffff 46%, #f6f3ed 100%);
+      color: var(--onyx);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.68;
+    }
+
+    .article-page {
+      width: 100%;
+      padding: 48px 18px;
+    }
+
+    .article-container {
+      max-width: 980px;
+      margin: 0 auto;
+    }
+
+    .article-card {
+      position: relative;
+      overflow: hidden;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.95), rgba(245, 242, 237, 0.98)),
+        var(--card-bg);
+      border: 1px solid var(--line);
+      box-shadow: 0 22px 60px var(--shadow);
+      padding: clamp(28px, 5vw, 64px);
+    }
+
+    .article-card::before {
+      content: "";
+      position: absolute;
+      inset: 0 0 auto 0;
+      height: 9px;
+      background: linear-gradient(90deg, var(--detalle), var(--detalle-2));
+    }
+
+    .article-kicker {
+      margin: 0 0 18px;
+      color: var(--detalle);
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .article-title {
+      max-width: 860px;
+      margin: 0;
+      color: var(--onyx);
+      font-size: clamp(1.35rem, 3vw, 2.7rem);
+      line-height: 1;
+      font-weight: 800;
+      letter-spacing: 0;
+    }
+
+    .article-author {
+      margin: 22px 0 0;
+      color: var(--detalle);
+      font-size: clamp(1rem, 2vw, 1.24rem);
+      font-weight: 700;
+    }
+
+    .article-meta {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin: 28px 0 0;
+    }
+
+    .meta-item {
+      padding: 14px 16px;
+      background: rgba(255, 255, 255, 0.78);
+      border: 1px solid var(--soft-line);
+    }
+
+    .meta-label {
+      display: block;
+      color: var(--detalle);
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .meta-value {
+      display: block;
+      margin-top: 4px;
+      color: var(--onyx);
+      font-size: 0.96rem;
+      font-weight: 700;
+      line-height: 1.35;
+    }
+
+    .article-divider {
+      width: 100%;
+      height: 1px;
+      margin: 34px 0;
+      background: linear-gradient(90deg, var(--detalle), var(--line), transparent);
+    }
+
+    .article-intro {
+      margin: 0;
+      max-width: 800px;
+      color: var(--onyx);
+      font-size: clamp(1.05rem, 1.6vw, 1.22rem);
+      line-height: 1.75;
+    }
+
+    .article-index {
+      margin: 38px 0;
+      padding: 22px;
+      background: rgba(255, 255, 255, 0.74);
+      border: 1px solid var(--soft-line);
+      border-left: 5px solid var(--detalle);
+    }
+
+    .article-index h2 {
+      margin: 0 0 14px;
+      color: var(--detalle);
+      font-size: 0.86rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .article-index ul {
+      display: grid;
+      gap: 8px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .article-index a {
+      color: var(--onyx);
+      font-size: 0.98rem;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .article-index a::before {
+      content: "-";
+      color: var(--detalle);
+      margin-right: 8px;
+    }
+
+    .article-index a:hover {
+      color: var(--detalle);
+      text-decoration: underline;
+      text-underline-offset: 4px;
+    }
+
+    .article-content {
+      display: grid;
+      gap: 34px;
+    }
+
+    .article-section {
+      scroll-margin-top: 28px;
+    }
+
+    .article-section h2 {
+      margin: 0 0 16px;
+      padding-bottom: 10px;
+      color: var(--detalle);
+      border-bottom: 1px solid var(--line);
+      font-size: clamp(1.22rem, 2vw, 1.6rem);
+      line-height: 1.2;
+      font-weight: 800;
+      letter-spacing: 0;
+    }
+
+    .article-section p {
+      margin: 0 0 18px;
+      color: var(--onyx);
+      font-size: 1.02rem;
+    }
+
+    .article-section p:last-child {
+      margin-bottom: 0;
+    }
+
+    .quote-box {
+      margin: 28px 0;
+      padding: 24px;
+      background: rgba(21, 21, 21, 0.07);
+      border-left: 5px solid var(--detalle);
+      color: var(--onyx);
+      font-size: 1.05rem;
+      font-style: italic;
+      line-height: 1.75;
+    }
+
+    .gallery-box {
+      margin-top: 8px;
+      padding: 28px;
+      background: var(--card-bg-2);
+      border: 1px solid var(--line);
+      border-top: 5px solid var(--detalle);
+      scroll-margin-top: 28px;
+    }
+
+    .gallery-box h2 {
+      margin: 0 0 18px;
+      color: var(--detalle);
+      font-size: 1.1rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .gallery-item {
+      margin: 0;
+      background: #ffffff;
+      border: 1px solid var(--soft-line);
+    }
+
+    .gallery-item img {
+      display: block;
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      background: #f6f1ea;
+    }
+
+    .gallery-item:first-child img {
+      object-fit: contain;
+      padding: 10px;
+      background: #111111;
+    }
+
+    .gallery-item figcaption {
+      padding: 12px 14px;
+      color: var(--muted);
+      font-size: 0.9rem;
+      font-weight: 700;
+      line-height: 1.35;
+    }
+
+    .student-box {
+      display: grid;
+      grid-template-columns: 150px 1fr;
+      gap: 22px;
+      align-items: center;
+      margin-top: 20px;
+      padding: 22px;
+      background: rgba(255, 255, 255, 0.82);
+      border: 1px solid var(--soft-line);
+    }
+
+    .student-photo {
+      width: 150px;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      border: 4px solid var(--detalle);
+      background: #ffffff;
+      box-shadow: 0 10px 26px rgba(20, 20, 20, 0.16);
+    }
+
+    .student-box p {
+      margin: 0;
+      color: var(--onyx);
+      font-size: 1rem;
+    }
+
+    .article-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      margin-top: 34px;
+    }
+
+    .article-button {
+      appearance: none;
+      border: 1px solid var(--detalle);
+      background: var(--detalle);
+      color: #ffffff;
+      cursor: pointer;
+      padding: 12px 18px;
+      font: inherit;
+      font-size: 0.82rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: background 160ms ease, color 160ms ease, transform 160ms ease;
+    }
+
+    .article-button:hover {
+      background: transparent;
+      color: var(--detalle);
+      transform: translateY(-1px);
+    }
+
+    @media (max-width: 760px) {
+      .article-meta,
+      .gallery-grid,
+      .student-box {
+        grid-template-columns: 1fr;
+      }
+
+      .student-photo {
+        width: 140px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .article-page {
+        padding: 22px 12px;
+      }
+
+      .article-card {
+        padding: 30px 20px;
+      }
+
+      .article-index,
+      .gallery-box {
+        padding: 18px;
+      }
+
+      .student-box {
+        padding: 18px;
+      }
+
+      .article-actions {
+        justify-content: stretch;
+      }
+
+      .article-button {
+        width: 100%;
+      }
+    }
+
+    @media print {
+      body {
+        background: #ffffff;
+      }
+
+      .article-page {
+        padding: 0;
+      }
+
+      .article-card {
+        box-shadow: none;
+        border: none;
+      }
+
+      .article-actions {
+        display: none;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="article-page">
+    <div class="article-container">
+      <article class="article-card">
+
+        <p class="article-kicker">Muestra</p>
+
+        <h1 class="article-title">
+          La lucha entre: la vida y la muerte
+        </h1>
+
+        <p class="article-author">
+          Joaquin Fernando Kozlowski
+        </p>
+
+        <div class="article-meta" aria-label="Datos de la propuesta">
+          <div class="meta-item">
+            <span class="meta-label">Muestra</span>
+            <span class="meta-value">Florecen Pañuelos, Florecen Voces</span>
+          </div>
+
+          <div class="meta-item">
+            <span class="meta-label">Asignatura</span>
+            <span class="meta-value">Taller de Diseño III, orientación Textil</span>
+          </div>
+
+          <div class="meta-item">
+            <span class="meta-label">Docentes</span>
+            <span class="meta-value">Daniela Tosar, Cecilia Dorado y Natalia López</span>
+          </div>
+
+          <div class="meta-item">
+            <span class="meta-label">Técnica</span>
+            <span class="meta-value">Estampado por sublimación</span>
+          </div>
+        </div>
+
+        <div class="article-divider"></div>
+
+        <p class="article-intro">
+          Este pañuelo parte de una dualidad directa: la vida y la muerte, el blanco y el negro, la lucha que se expresa
+          en la calle y también en lo cotidiano.
+        </p>
+
+        <nav class="article-index" aria-label="Índice del artículo">
+          <h2>Índice</h2>
+          <ul>
+            <li><a href="#propuesta">La propuesta del pañuelo</a></li>
+            <li><a href="#dualidad">Blanco, negro y dualidad</a></li>
+            <li><a href="#bandana">La base bandana</a></li>
+            <li><a href="#centro">El centro de la composición</a></li>
+            <li><a href="#reflexion">Reflexión de la actividad</a></li>
+            <li><a href="#galeria">Galería del pañuelo</a></li>
+          </ul>
+        </nav>
+
+        <div class="article-content">
+
+          <section id="propuesta" class="article-section">
+            <h2>La propuesta del pañuelo</h2>
+
+            <p>
+              “La lucha entre: la vida y la muerte” surge de una mirada sobre las formas de resistencia que aparecen
+              tanto en las marchas y reclamos en las calles como en el día a día. El pañuelo propone representar esa
+              tensión constante frente a la violencia y la muerte.
+            </p>
+
+            <p>
+              La composición busca construir paralelismos visuales con el arte y con la potencia gráfica del pañuelo
+              como soporte de manifestación.
+            </p>
+          </section>
+
+          <section id="dualidad" class="article-section">
+            <h2>Blanco, negro y dualidad</h2>
+
+            <p>
+              La elección de solo dos colores es intencional. En esta propuesta no hay grises: la imagen trabaja desde
+              el contraste entre blanco y negro para reforzar la idea de una lucha marcada entre vida y muerte.
+            </p>
+
+            <p>
+              Esa oposición aparece como reflejo dentro del pañuelo, organizando una lectura directa, cruda y de alto
+              impacto visual.
+            </p>
+          </section>
+
+          <section id="bandana" class="article-section">
+            <h2>La base bandana</h2>
+
+            <p>
+              El pañuelo toma como base formal la bandana, un formato muy presente en manifestaciones y marchas. Desde
+              esa referencia, la estampa combina bordes, símbolos repetidos y escenas enfrentadas para construir una
+              superficie cargada de signos.
+            </p>
+
+            <p>
+              El lenguaje gráfico se apoya en el contraste, la repetición y la simetría para intensificar el sentido de
+              confrontación y reclamo.
+            </p>
+          </section>
+
+          <section id="centro" class="article-section">
+            <h2>El centro de la composición</h2>
+
+            <p>
+              En el centro aparece, de forma grande y cerrada, un bebé recién nacido. Ese núcleo funciona como punto de
+              atención y como símbolo de maternidad, cuidado y vínculo con un ser querido.
+            </p>
+
+            <p>
+              A su alrededor, las imágenes enfrentadas refuerzan la tensión del concepto: una lucha visual donde el
+              centro reúne la vida, el cuidado y aquello que se busca proteger.
+            </p>
+          </section>
+
+          <section id="reflexion" class="article-section">
+            <h2>Reflexión de la actividad</h2>
+
+            <div class="quote-box">
+              Realizar este pañuelo permitió mostrar una lucha constante desde un punto de vista y un estilo propios.
+            </div>
+
+            <p>
+              El proceso también abrió una reflexión sobre el momento delicado que se atraviesa socialmente y sobre la
+              necesidad de estar juntos para pedir justicia.
+            </p>
+          </section>
+
+          <section id="galeria" class="gallery-box">
+            <h2>Galería del pañuelo</h2>
+
+            <div class="gallery-grid">
+              <figure class="gallery-item">
+                <img src="assets/images/kozlowski-joaquin-panuelo-abierto.jpg" alt="Pañuelo abierto en blanco y negro con composición de bandana" />
+                <figcaption>Pañuelo abierto completo</figcaption>
+              </figure>
+
+              <figure class="gallery-item">
+                <img src="assets/images/kozlowski-joaquin-panuelo-muneca.jpg" alt="Pañuelo atado en la muñeca con el puño levantado" />
+                <figcaption>Modo de uso: muñeca</figcaption>
+              </figure>
+
+              <figure class="gallery-item">
+                <img src="assets/images/kozlowski-joaquin-panuelo-cabeza.jpg" alt="Pañuelo usado en la cabeza" />
+                <figcaption>Modo de uso: cabeza</figcaption>
+              </figure>
+
+              <figure class="gallery-item">
+                <img src="assets/images/kozlowski-joaquin-panuelo-rostro.jpg" alt="Pañuelo usado sobre el rostro" />
+                <figcaption>Modo de uso: rostro</figcaption>
+              </figure>
+
+              <figure class="gallery-item">
+                <img src="assets/images/kozlowski-joaquin-retrato.jpg" alt="Retrato de Joaquin Fernando Kozlowski" />
+                <figcaption>Estudiante: Joaquin Fernando Kozlowski</figcaption>
+              </figure>
+            </div>
+
+            <div class="student-box">
+              <img src="assets/images/kozlowski-joaquin-retrato.jpg" alt="Retrato de Joaquin Fernando Kozlowski" class="student-photo" />
+              <p>
+                Propuesta realizada por Joaquin Fernando Kozlowski en el marco de Taller de Diseño III, orientación
+                Textil, junto con el LAD (Laboratorio de Diseño).
+              </p>
+            </div>
+          </section>
+
+        </div>
+
+        <div class="article-actions">
+          <button class="article-button" type="button" onclick="window.print()">
+            Imprimir / Guardar PDF
+          </button>
+        </div>
+
+      </article>
+    </div>
+  </main>
+
+  <script>
+    document.querySelectorAll('a[href^="#"]').forEach(function (link) {
+      link.addEventListener("click", function (event) {
+        var target = document.querySelector(this.getAttribute("href"));
+        if (!target) return;
+
+        event.preventDefault();
+        target.scrollIntoView({
+          behavior: "smooth",
+          block: "start"
+        });
+      });
+    });
+  </script>
+</body>
+</html>

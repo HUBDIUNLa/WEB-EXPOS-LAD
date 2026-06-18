@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Espiral de nombres - Eros Panucza Pelaccia</title>
+  <meta name="description" content="Muestra Florecen Pañuelos, Florecen Voces. Propuesta de pañuelo de Eros Nicolas Panucza Pelaccia." />
+
+  <style>
+    :root {
+      --detalle: #8f1518;
+      --detalle-2: #1b1b1b;
+      --onyx: #2b2727;
+      --card-bg: #f7f1ee;
+      --card-bg-2: #ffffff;
+      --muted: #6c6260;
+      --line: rgba(143, 21, 24, 0.3);
+      --soft-line: rgba(143, 21, 24, 0.14);
+      --shadow: rgba(40, 24, 24, 0.18);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background:
+        linear-gradient(180deg, #f6eded 0%, #ffffff 46%, #f8f2ee 100%);
+      color: var(--onyx);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.68;
+    }
+
+    .article-page {
+      width: 100%;
+      padding: 48px 18px;
+    }
+
+    .article-container {
+      max-width: 980px;
+      margin: 0 auto;
+    }
+
+    .article-card {
+      position: relative;
+      overflow: hidden;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.94), rgba(247, 241, 238, 0.98)),
+        var(--card-bg);
+      border: 1px solid var(--line);
+      box-shadow: 0 22px 60px var(--shadow);
+      padding: clamp(28px, 5vw, 64px);
+    }
+
+    .article-card::before {
+      content: "";
+      position: absolute;
+      inset: 0 0 auto 0;
+      height: 9px;
+      background: linear-gradient(90deg, var(--detalle-2), var(--detalle));
+    }
+
+    .article-kicker {
+      margin: 0 0 18px;
+      color: var(--detalle);
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .article-title {
+      max-width: 860px;
+      margin: 0;
+      color: var(--onyx);
+      font-size: clamp(1.35rem, 3vw, 2.7rem);
+      line-height: 1;
+      font-weight: 800;
+      letter-spacing: 0;
+    }
+
+    .article-author {
+      margin: 22px 0 0;
+      color: var(--detalle);
+      font-size: clamp(1rem, 2vw, 1.24rem);
+      font-weight: 700;
+    }
+
+    .article-meta {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin: 28px 0 0;
+    }
+
+    .meta-item {
+      padding: 14px 16px;
+      background: rgba(255, 255, 255, 0.76);
+      border: 1px solid var(--soft-line);
+    }
+
+    .meta-label {
+      display: block;
+      color: var(--detalle);
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .meta-value {
+      display: block;
+      margin-top: 4px;
+      color: var(--onyx);
+      font-size: 0.96rem;
+      font-weight: 700;
+      line-height: 1.35;
+    }
+
+    .article-divider {
+      width: 100%;
+      height: 1px;
+      margin: 34px 0;
+      background: linear-gradient(90deg, var(--detalle), var(--line), transparent);
+    }
+
+    .article-intro {
+      margin: 0;
+      max-width: 800px;
+      color: var(--onyx);
+      font-size: clamp(1.05rem, 1.6vw, 1.22rem);
+      line-height: 1.75;
+    }
+
+    .article-index {
+      margin: 38px 0;
+      padding: 22px;
+      background: rgba(255, 255, 255, 0.72);
+      border: 1px solid var(--soft-line);
+      border-left: 5px solid var(--detalle);
+    }
+
+    .article-index h2 {
+      margin: 0 0 14px;
+      color: var(--detalle);
+      font-size: 0.86rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .article-index ul {
+      display: grid;
+      gap: 8px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .article-index a {
+      color: var(--onyx);
+      font-size: 0.98rem;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .article-index a::before {
+      content: "-";
+      color: var(--detalle);
+      margin-right: 8px;
+    }
+
+    .article-index a:hover {
+      color: var(--detalle);
+      text-decoration: underline;
+      text-underline-offset: 4px;
+    }
+
+    .article-content {
+      display: grid;
+      gap: 34px;
+    }
+
+    .article-section {
+      scroll-margin-top: 28px;
+    }
+
+    .article-section h2 {
+      margin: 0 0 16px;
+      padding-bottom: 10px;
+      color: var(--detalle);
+      border-bottom: 1px solid var(--line);
+      font-size: clamp(1.22rem, 2vw, 1.6rem);
+      line-height: 1.2;
+      font-weight: 800;
+      letter-spacing: 0;
+    }
+
+    .article-section p {
+      margin: 0 0 18px;
+      color: var(--onyx);
+      font-size: 1.02rem;
+    }
+
+    .article-section p:last-child {
+      margin-bottom: 0;
+    }
+
+    .quote-box {
+      margin: 28px 0;
+      padding: 24px;
+      background: rgba(143, 21, 24, 0.07);
+      border-left: 5px solid var(--detalle);
+      color: var(--onyx);
+      font-size: 1.05rem;
+      font-style: italic;
+      line-height: 1.75;
+    }
+
+    .gallery-box {
+      margin-top: 8px;
+      padding: 28px;
+      background: var(--card-bg-2);
+      border: 1px solid var(--line);
+      border-top: 5px solid var(--detalle);
+      scroll-margin-top: 28px;
+    }
+
+    .gallery-box h2 {
+      margin: 0 0 18px;
+      color: var(--detalle);
+      font-size: 1.1rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .gallery-item {
+      margin: 0;
+      background: #ffffff;
+      border: 1px solid var(--soft-line);
+    }
+
+    .gallery-item img {
+      display: block;
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      background: #f6f1ea;
+    }
+
+    .gallery-item:first-child img {
+      object-fit: contain;
+      padding: 10px;
+      background: #0b0b0b;
+    }
+
+    .gallery-item figcaption {
+      padding: 12px 14px;
+      color: var(--muted);
+      font-size: 0.9rem;
+      font-weight: 700;
+      line-height: 1.35;
+    }
+
+    .student-box {
+      display: grid;
+      grid-template-columns: 150px 1fr;
+      gap: 22px;
+      align-items: center;
+      margin-top: 20px;
+      padding: 22px;
+      background: rgba(255, 255, 255, 0.82);
+      border: 1px solid var(--soft-line);
+    }
+
+    .student-photo {
+      width: 150px;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      border: 4px solid var(--detalle);
+      background: #ffffff;
+      box-shadow: 0 10px 26px rgba(40, 24, 24, 0.16);
+    }
+
+    .student-box p {
+      margin: 0;
+      color: var(--onyx);
+      font-size: 1rem;
+    }
+
+    .article-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      margin-top: 34px;
+    }
+
+    .article-button {
+      appearance: none;
+      border: 1px solid var(--detalle);
+      background: var(--detalle);
+      color: #ffffff;
+      cursor: pointer;
+      padding: 12px 18px;
+      font: inherit;
+      font-size: 0.82rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: background 160ms ease, color 160ms ease, transform 160ms ease;
+    }
+
+    .article-button:hover {
+      background: transparent;
+      color: var(--detalle);
+      transform: translateY(-1px);
+    }
+
+    @media (max-width: 760px) {
+      .article-meta,
+      .gallery-grid,
+      .student-box {
+        grid-template-columns: 1fr;
+      }
+
+      .student-photo {
+        width: 140px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .article-page {
+        padding: 22px 12px;
+      }
+
+      .article-card {
+        padding: 30px 20px;
+      }
+
+      .article-index,
+      .gallery-box {
+        padding: 18px;
+      }
+
+      .student-box {
+        padding: 18px;
+      }
+
+      .article-actions {
+        justify-content: stretch;
+      }
+
+      .article-button {
+        width: 100%;
+      }
+    }
+
+    @media print {
+      body {
+        background: #ffffff;
+      }
+
+      .article-page {
+        padding: 0;
+      }
+
+      .article-card {
+        box-shadow: none;
+        border: none;
+      }
+
+      .article-actions {
+        display: none;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="article-page">
+    <div class="article-container">
+      <article class="article-card">
+
+        <p class="article-kicker">Muestra</p>
+
+        <h1 class="article-title">
+          Espiral de nombres
+        </h1>
+
+        <p class="article-author">
+          Eros Nicolas Panucza Pelaccia
+        </p>
+
+        <div class="article-meta" aria-label="Datos de la propuesta">
+          <div class="meta-item">
+            <span class="meta-label">Muestra</span>
+            <span class="meta-value">Florecen Pañuelos, Florecen Voces</span>
+          </div>
+
+          <div class="meta-item">
+            <span class="meta-label">Asignatura</span>
+            <span class="meta-value">Taller de Diseño III, orientación Textil</span>
+          </div>
+
+          <div class="meta-item">
+            <span class="meta-label">Docentes</span>
+            <span class="meta-value">Daniela Tosar, Cecilia Dorado y Natalia López</span>
+          </div>
+
+          <div class="meta-item">
+            <span class="meta-label">Concepto</span>
+            <span class="meta-value">Memoria activa y denuncia colectiva</span>
+          </div>
+        </div>
+
+        <div class="article-divider"></div>
+
+        <p class="article-intro">
+          “Espiral de nombres” visibiliza y mantiene viva la memoria de mujeres víctimas de femicidio en Argentina,
+          transformando el pañuelo en un soporte de denuncia y memoria colectiva.
+        </p>
+
+        <nav class="article-index" aria-label="Índice del artículo">
+          <h2>Índice</h2>
+          <ul>
+            <li><a href="#propuesta">La propuesta del pañuelo</a></li>
+            <li><a href="#soporte">El pañuelo como símbolo público</a></li>
+            <li><a href="#espiral">Nombres, diarios y espiral</a></li>
+            <li><a href="#impacto">Paleta e impacto visual</a></li>
+            <li><a href="#reflexion">Reflexión de la actividad</a></li>
+            <li><a href="#galeria">Galería del pañuelo</a></li>
+          </ul>
+        </nav>
+
+        <div class="article-content">
+
+          <section id="propuesta" class="article-section">
+            <h2>La propuesta del pañuelo</h2>
+
+            <p>
+              La propuesta surge a partir de la necesidad de visibilizar y mantener viva la memoria de mujeres víctimas
+              de femicidio en Argentina. Tomando como referencia el movimiento Ni Una Menos, el proyecto busca diseñar
+              un objeto gráfico capaz de acompañar manifestaciones y funcionar como símbolo de memoria colectiva dentro
+              del espacio público.
+            </p>
+
+            <p>
+              El pañuelo se convierte así en una pieza de presencia activa: no solo recuerda, también acompaña la lucha
+              contra la violencia de género.
+            </p>
+          </section>
+
+          <section id="soporte" class="article-section">
+            <h2>El pañuelo como símbolo público</h2>
+
+            <p>
+              La elección del pañuelo como soporte responde a su fuerte valor simbólico en las luchas sociales
+              argentinas. Más que un accesorio, funciona como elemento de identificación, pertenencia y expresión
+              política.
+            </p>
+
+            <p>
+              Su formato permite trasladar el mensaje al cuerpo, a la calle y a las movilizaciones, haciendo visible la
+              memoria en el espacio colectivo.
+            </p>
+          </section>
+
+          <section id="espiral" class="article-section">
+            <h2>Nombres, diarios y espiral</h2>
+
+            <p>
+              La construcción visual se basa en nombres de víctimas organizados en una espiral formada por recortes de
+              diarios rotos. La presencia del periódico remite a los medios de comunicación, lugar donde muchos casos
+              adquieren visibilidad pública.
+            </p>
+
+            <p>
+              Los bordes rasgados simbolizan fragmentación, ausencia y necesidad de reconstruir la memoria. La espiral,
+              por su parte, representa la acumulación de historias, la permanencia de la problemática y un recorrido
+              visual que guía la mirada hacia el centro.
+            </p>
+          </section>
+
+          <section id="impacto" class="article-section">
+            <h2>Paleta e impacto visual</h2>
+
+            <p>
+              La paleta de rojos y negros busca generar impacto visual y emocional, reforzando el carácter de denuncia
+              y visibilización de la propuesta.
+            </p>
+
+            <p>
+              La forma de la espiral sugiere un proceso continuo que no se cierra, reflejando que la violencia de
+              género sigue siendo una problemática vigente.
+            </p>
+          </section>
+
+          <section id="reflexion" class="article-section">
+            <h2>Reflexión de la actividad</h2>
+
+            <div class="quote-box">
+              El pañuelo se convierte en un soporte de memoria activa que busca recordar a las víctimas, promover la
+              reflexión y acompañar la lucha colectiva contra la violencia de género.
+            </div>
+
+            <p>
+              La pieza propone recordar desde el diseño, sosteniendo una imagen que interpela y vuelve visibles nombres
+              que no deben desaparecer de la memoria social.
+            </p>
+          </section>
+
+          <section id="galeria" class="gallery-box">
+            <h2>Galería del pañuelo</h2>
+
+            <div class="gallery-grid">
+              <figure class="gallery-item">
+                <img src="assets/images/panucza-eros-panuelo-abierto.jpeg" alt="Pañuelo abierto Espiral de nombres con recortes rojos y negros" />
+                <figcaption>Pañuelo abierto completo</figcaption>
+              </figure>
+
+              <figure class="gallery-item">
+                <img src="assets/images/panucza-eros-panuelo-espalda.jpeg" alt="Pañuelo Espiral de nombres usado sobre la espalda en una manifestación" />
+                <figcaption>Modo de uso: cuello / espalda</figcaption>
+              </figure>
+
+              <figure class="gallery-item">
+                <img src="assets/images/panucza-eros-panuelo-muneca.jpeg" alt="Pañuelo Espiral de nombres usado en la muñeca" />
+                <figcaption>Modo de uso: muñeca</figcaption>
+              </figure>
+
+              <figure class="gallery-item">
+                <img src="assets/images/panucza-eros-panuelo-cabeza.jpeg" alt="Pañuelo Espiral de nombres usado como vincha" />
+                <figcaption>Modo de uso: cabeza</figcaption>
+              </figure>
+
+              <figure class="gallery-item">
+                <img src="assets/images/panucza-eros-retrato.jpeg" alt="Retrato de Eros Nicolas Panucza Pelaccia" />
+                <figcaption>Estudiante: Eros Nicolas Panucza Pelaccia</figcaption>
+              </figure>
+            </div>
+
+            <div class="student-box">
+              <img src="assets/images/panucza-eros-retrato.jpeg" alt="Retrato de Eros Nicolas Panucza Pelaccia" class="student-photo" />
+              <p>
+                Propuesta realizada por Eros Nicolas Panucza Pelaccia en el marco de Taller de Diseño III, orientación
+                Textil, junto con el LAD (Laboratorio de Diseño).
+              </p>
+            </div>
+          </section>
+
+        </div>
+
+        <div class="article-actions">
+          <button class="article-button" type="button" onclick="window.print()">
+            Imprimir / Guardar PDF
+          </button>
+        </div>
+
+      </article>
+    </div>
+  </main>
+
+  <script>
+    document.querySelectorAll('a[href^="#"]').forEach(function (link) {
+      link.addEventListener("click", function (event) {
+        var target = document.querySelector(this.getAttribute("href"));
+        if (!target) return;
+
+        event.preventDefault();
+        target.scrollIntoView({
+          behavior: "smooth",
+          block: "start"
+        });
+      });
+    });
+  </script>
+</body>
+</html>
