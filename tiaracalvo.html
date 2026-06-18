@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Florecen Pañuelos, Florecen Voces - Calvo Tiara</title>
+  <meta name="description" content="Muestra Florecen Pañuelos, Florecen Voces. Propuesta de pañuelo de Calvo Tiara." />
+
+  <style>
+    :root {
+      --detalle: #6f3d91;
+      --detalle-2: #d6ad27;
+      --onyx: #353839;
+      --card-bg: #fbf8fd;
+      --card-bg-2: #ffffff;
+      --muted: #6f6873;
+      --line: rgba(111, 61, 145, 0.26);
+      --soft-line: rgba(111, 61, 145, 0.14);
+      --shadow: rgba(48, 34, 56, 0.16);
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      background: linear-gradient(180deg, #f7f1fa 0%, #ffffff 45%, #f5f1f7 100%);
+      color: var(--onyx);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.68;
+    }
+
+    .article-page {
+      width: 100%;
+      padding: 48px 18px;
+    }
+
+    .article-container {
+      max-width: 980px;
+      margin: 0 auto;
+    }
+
+    .article-card {
+      position: relative;
+      overflow: hidden;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.92), rgba(251,248,253,0.98)),
+        var(--card-bg);
+      border: 1px solid var(--line);
+      box-shadow: 0 22px 60px var(--shadow);
+      padding: clamp(28px, 5vw, 64px);
+    }
+
+    .article-card::before {
+      content: "";
+      position: absolute;
+      inset: 0 0 auto 0;
+      height: 9px;
+      background: linear-gradient(90deg, var(--detalle), var(--detalle-2));
+    }
+
+    .article-kicker {
+      margin: 0 0 18px;
+      color: var(--detalle);
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .article-title {
+      max-width: 820px;
+      margin: 0;
+      color: var(--onyx);
+      font-size: clamp(1.55rem, 3.4vw, 3rem);
+      line-height: 1;
+      font-weight: 800;
+      letter-spacing: 0;
+    }
+
+    .article-author {
+      margin: 22px 0 0;
+      color: var(--detalle);
+      font-size: clamp(1rem, 2vw, 1.24rem);
+      font-weight: 700;
+    }
+
+    .article-meta {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin: 28px 0 0;
+    }
+
+    .meta-item {
+      padding: 14px 16px;
+      background: rgba(255,255,255,0.72);
+      border: 1px solid var(--soft-line);
+    }
+
+    .meta-label {
+      display: block;
+      color: var(--detalle);
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .meta-value {
+      display: block;
+      margin-top: 4px;
+      color: var(--onyx);
+      font-size: 0.96rem;
+      font-weight: 700;
+      line-height: 1.35;
+    }
+
+    .article-divider {
+      width: 100%;
+      height: 1px;
+      margin: 34px 0;
+      background: linear-gradient(90deg, var(--detalle), var(--line), transparent);
+    }
+
+    .article-intro {
+      margin: 0;
+      max-width: 790px;
+      color: var(--onyx);
+      font-size: clamp(1.05rem, 1.6vw, 1.22rem);
+      line-height: 1.75;
+    }
+
+    .article-index {
+      margin: 38px 0;
+      padding: 22px;
+      background: rgba(255,255,255,0.72);
+      border: 1px solid var(--soft-line);
+      border-left: 5px solid var(--detalle);
+    }
+
+    .article-index h2 {
+      margin: 0 0 14px;
+      color: var(--detalle);
+      font-size: 0.86rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .article-index ul {
+      display: grid;
+      gap: 8px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .article-index a {
+      color: var(--onyx);
+      font-size: 0.98rem;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .article-index a::before {
+      content: "-";
+      color: var(--detalle);
+      margin-right: 8px;
+    }
+
+    .article-index a:hover {
+      color: var(--detalle);
+      text-decoration: underline;
+      text-underline-offset: 4px;
+    }
+
+    .article-content {
+      display: grid;
+      gap: 34px;
+    }
+
+    .article-section {
+      scroll-margin-top: 28px;
+    }
+
+    .article-section h2 {
+      margin: 0 0 16px;
+      padding-bottom: 10px;
+      color: var(--detalle);
+      border-bottom: 1px solid var(--line);
+      font-size: clamp(1.22rem, 2vw, 1.6rem);
+      line-height: 1.2;
+      font-weight: 800;
+      letter-spacing: 0;
+    }
+
+    .article-section p {
+      margin: 0 0 18px;
+      color: var(--onyx);
+      font-size: 1.02rem;
+    }
+
+    .article-section p:last-child {
+      margin-bottom: 0;
+    }
+
+    .quote-box {
+      margin: 28px 0;
+      padding: 24px;
+      background: rgba(111, 61, 145, 0.07);
+      border-left: 5px solid var(--detalle);
+      color: var(--onyx);
+      font-size: 1.05rem;
+      font-style: italic;
+      line-height: 1.75;
+    }
+
+    .gallery-box {
+      margin-top: 8px;
+      padding: 28px;
+      background: var(--card-bg-2);
+      border: 1px solid var(--line);
+      border-top: 5px solid var(--detalle);
+      scroll-margin-top: 28px;
+    }
+
+    .gallery-box h2 {
+      margin: 0 0 18px;
+      color: var(--detalle);
+      font-size: 1.1rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .gallery-item {
+      margin: 0;
+      background: #ffffff;
+      border: 1px solid var(--soft-line);
+    }
+
+    .gallery-item img {
+      display: block;
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      background: #f2edf5;
+    }
+
+    .gallery-item:first-child img {
+      object-fit: contain;
+      padding: 10px;
+    }
+
+    .gallery-item figcaption {
+      padding: 12px 14px;
+      color: var(--muted);
+      font-size: 0.9rem;
+      font-weight: 700;
+      line-height: 1.35;
+    }
+
+    .article-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      margin-top: 34px;
+    }
+
+    .article-button {
+      appearance: none;
+      border: 1px solid var(--detalle);
+      background: var(--detalle);
+      color: #ffffff;
+      cursor: pointer;
+      padding: 12px 18px;
+      font: inherit;
+      font-size: 0.82rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: background 160ms ease, color 160ms ease, transform 160ms ease;
+    }
+
+    .article-button:hover {
+      background: transparent;
+      color: var(--detalle);
+      transform: translateY(-1px);
+    }
+
+    @media (max-width: 760px) {
+      .article-meta,
+      .gallery-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .article-page { padding: 22px 12px; }
+      .article-card { padding: 30px 20px; }
+      .article-index,
+      .gallery-box { padding: 18px; }
+      .article-actions { justify-content: stretch; }
+      .article-button { width: 100%; }
+    }
+
+    @media print {
+      body { background: #ffffff; }
+      .article-page { padding: 0; }
+      .article-card {
+        box-shadow: none;
+        border: none;
+      }
+      .article-actions { display: none; }
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="article-page">
+    <div class="article-container">
+      <article class="article-card">
+
+        <p class="article-kicker">Muestra</p>
+
+        <h1 class="article-title">
+          Florecen Pañuelos, Florecen Voces
+        </h1>
+
+        <p class="article-author">
+          Calvo Tiara
+        </p>
+
+        <div class="article-meta" aria-label="Datos de la propuesta">
+          <div class="meta-item">
+            <span class="meta-label">Asignatura</span>
+            <span class="meta-value">Taller de Diseño III, orientación Textil</span>
+          </div>
+
+          <div class="meta-item">
+            <span class="meta-label">Docentes</span>
+            <span class="meta-value">Daniela Tosar, Cecilia Dorado y Natalia López</span>
+          </div>
+
+          <div class="meta-item">
+            <span class="meta-label">Actividad co-organizada</span>
+            <span class="meta-value">Taller de Diseño III de la Tecnicatura en Diseño Industrial, Orientación Textil, junto con 
+                el LAD (Laboratorio de Diseño)</span>
+          </div>
+
+          <div class="meta-item">
+            <span class="meta-label">Técnica</span>
+            <span class="meta-value">Estampado por sublimación</span>
+          </div>
+        </div>
+
+        <div class="article-divider"></div>
+
+        <p class="article-intro">
+          El diseño de este pañuelo surge a partir de la trascendencia que tiene la lucha de las mujeres a lo largo
+          de la historia, sin importar la época, el lugar, la edad, la cultura o el idioma.
+        </p>
+
+        <nav class="article-index" aria-label="Índice del artículo">
+          <h2>Índice</h2>
+          <ul>
+            <li><a href="#propuesta">La propuesta del pañuelo</a></li>
+            <li><a href="#generaciones">Una lucha entre generaciones</a></li>
+            <li><a href="#colores">Color, visibilidad y memoria</a></li>
+            <li><a href="#reflexion">Reflexión de la actividad</a></li>
+            <li><a href="#galeria">Galería del pañuelo</a></li>
+          </ul>
+        </nav>
+
+        <div class="article-content">
+
+          <section id="propuesta" class="article-section">
+            <h2>La propuesta del pañuelo</h2>
+
+            <p>
+              La pieza busca representar a cada una de las mujeres que lucharon por nuestros derechos en el pasado
+              y también a quienes seguimos defendiéndolos y ampliándolos en la actualidad.
+            </p>
+
+            <p>
+              El pañuelo reúne siluetas, consignas y registros visuales vinculados con marchas y manifestaciones.
+              Desde esa composición colectiva, la imagen construye una trama donde la memoria, el reclamo y la
+              presencia de las mujeres aparecen como una fuerza compartida.
+            </p>
+          </section>
+
+          <section id="generaciones" class="article-section">
+            <h2>Una lucha entre generaciones</h2>
+
+            <p>
+              En el diseño pueden observarse siluetas de niñas, adolescentes, mujeres adultas y mujeres mayores,
+              con el objetivo de reflejar que esta lucha atraviesa generaciones y acompaña a las mujeres en todas
+              las etapas de la vida.
+            </p>
+
+            <p>
+              Dentro de cada una de las siluetas aparecen carteles tomados de marchas y manifestaciones, destacando
+              palabras y frases que simbolizan los reclamos, las conquistas y la fuerza colectiva del movimiento.
+            </p>
+          </section>
+
+          <section id="colores" class="article-section">
+            <h2>Color, visibilidad y memoria</h2>
+
+            <p>
+              La elección de los colores también posee un significado particular. El violeta representa al movimiento
+              Ni Una Menos y a la lucha por la igualdad y el fin de la violencia de género.
+            </p>
+
+            <p>
+              Los tonos grises simbolizan el paso del tiempo y las distintas generaciones que formaron parte de esta
+              causa, mientras que el amarillo cumple la función de resaltar el violeta, otorgándole mayor visibilidad
+              y poniendo en valor una lucha que continúa vigente en la actualidad.
+            </p>
+          </section>
+
+          <section id="reflexion" class="article-section">
+            <h2>Reflexión de la actividad</h2>
+
+            <div class="quote-box">
+              Me gustaría que se reflexione acerca de todo lo que conseguimos hasta el día de hoy a través de la
+              lucha feminista que realizaron las mujeres, y sobre la importancia de seguir luchando sin dar por
+              sentados derechos que aún se siguen viendo vulnerados.
+            </div>
+
+            <p>
+              La propuesta invita a reconocer que la equidad y el respeto por nuestros derechos y nuestras vidas
+              no son conquistas cerradas, sino una construcción que requiere continuidad, memoria y participación
+              colectiva.
+            </p>
+          </section>
+
+          <section id="galeria" class="gallery-box">
+            <h2>Galería del pañuelo</h2>
+
+            <div class="gallery-grid">
+              <figure class="gallery-item">
+                <img src="assets/images/calvo-panuelo-abierto.jpg" alt="Pañuelo abierto completo con siluetas y consignas feministas" />
+                <figcaption>Pañuelo abierto completo</figcaption>
+              </figure>
+
+              <figure class="gallery-item">
+                <img src="assets/images/calvo-panuelo-cuello.jpg" alt="Pañuelo usado en el cuello durante una marcha" />
+                <figcaption>Modo de uso: cuello</figcaption>
+              </figure>
+
+              <figure class="gallery-item">
+                <img src="assets/images/calvo-panuelo-muneca.jpg" alt="Pañuelo usado atado en la muñeca" />
+                <figcaption>Modo de uso: muñeca</figcaption>
+              </figure>
+
+              <figure class="gallery-item">
+                <img src="assets/images/calvo-panuelo-cabeza.jpg" alt="Pañuelo usado como vincha en la cabeza" />
+                <figcaption>Modo de uso: cabeza</figcaption>
+              </figure>
+            </div>
+          </section>
+
+        </div>
+
+        <div class="article-actions">
+          <button class="article-button" type="button" onclick="window.print()">
+            Imprimir / Guardar PDF
+          </button>
+        </div>
+
+      </article>
+    </div>
+  </main>
+
+  <script>
+    document.querySelectorAll('a[href^="#"]').forEach(function (link) {
+      link.addEventListener("click", function (event) {
+        var target = document.querySelector(this.getAttribute("href"));
+        if (!target) return;
+
+        event.preventDefault();
+        target.scrollIntoView({
+          behavior: "smooth",
+          block: "start"
+        });
+      });
+    });
+  </script>
+</body>
+</html>
