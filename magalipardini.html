@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Si algo me pasa, ya saben quién fue - Pardini Magali</title>
+  <meta name="description" content="Muestra Florecen Pañuelos, Florecen Voces. Propuesta de pañuelo de Pardini Magali." />
+
+  <style>
+    :root {
+      --detalle: #2f6b49;
+      --detalle-2: #a83332;
+      --onyx: #313431;
+      --card-bg: #f7faf6;
+      --card-bg-2: #ffffff;
+      --muted: #626b63;
+      --line: rgba(47, 107, 73, 0.27);
+      --soft-line: rgba(168, 51, 50, 0.16);
+      --shadow: rgba(30, 48, 37, 0.17);
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      background: linear-gradient(180deg, #f1f7f1 0%, #ffffff 45%, #f8f3f2 100%);
+      color: var(--onyx);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.68;
+    }
+
+    .article-page {
+      width: 100%;
+      padding: 48px 18px;
+    }
+
+    .article-container {
+      max-width: 980px;
+      margin: 0 auto;
+    }
+
+    .article-card {
+      position: relative;
+      overflow: hidden;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.94), rgba(247,250,246,0.98)),
+        var(--card-bg);
+      border: 1px solid var(--line);
+      box-shadow: 0 22px 60px var(--shadow);
+      padding: clamp(28px, 5vw, 64px);
+    }
+
+    .article-card::before {
+      content: "";
+      position: absolute;
+      inset: 0 0 auto 0;
+      height: 9px;
+      background: linear-gradient(90deg, var(--detalle), var(--detalle-2));
+    }
+
+    .article-kicker {
+      margin: 0 0 18px;
+      color: var(--detalle);
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .article-title {
+      max-width: 850px;
+      margin: 0;
+      color: var(--onyx);
+      font-size: clamp(1.4rem, 3.1vw, 2.75rem);
+      line-height: 1;
+      font-weight: 800;
+      letter-spacing: 0;
+    }
+
+    .article-author {
+      margin: 22px 0 0;
+      color: var(--detalle);
+      font-size: clamp(1rem, 2vw, 1.24rem);
+      font-weight: 700;
+    }
+
+    .article-meta {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin: 28px 0 0;
+    }
+
+    .meta-item {
+      padding: 14px 16px;
+      background: rgba(255,255,255,0.76);
+      border: 1px solid var(--soft-line);
+    }
+
+    .meta-label {
+      display: block;
+      color: var(--detalle);
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .meta-value {
+      display: block;
+      margin-top: 4px;
+      color: var(--onyx);
+      font-size: 0.96rem;
+      font-weight: 700;
+      line-height: 1.35;
+    }
+
+    .article-divider {
+      width: 100%;
+      height: 1px;
+      margin: 34px 0;
+      background: linear-gradient(90deg, var(--detalle), var(--line), transparent);
+    }
+
+    .article-intro {
+      margin: 0;
+      max-width: 800px;
+      color: var(--onyx);
+      font-size: clamp(1.05rem, 1.6vw, 1.22rem);
+      line-height: 1.75;
+    }
+
+    .article-index {
+      margin: 38px 0;
+      padding: 22px;
+      background: rgba(255,255,255,0.72);
+      border: 1px solid var(--soft-line);
+      border-left: 5px solid var(--detalle);
+    }
+
+    .article-index h2 {
+      margin: 0 0 14px;
+      color: var(--detalle);
+      font-size: 0.86rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .article-index ul {
+      display: grid;
+      gap: 8px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .article-index a {
+      color: var(--onyx);
+      font-size: 0.98rem;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .article-index a::before {
+      content: "-";
+      color: var(--detalle);
+      margin-right: 8px;
+    }
+
+    .article-index a:hover {
+      color: var(--detalle);
+      text-decoration: underline;
+      text-underline-offset: 4px;
+    }
+
+    .article-content {
+      display: grid;
+      gap: 34px;
+    }
+
+    .article-section {
+      scroll-margin-top: 28px;
+    }
+
+    .article-section h2 {
+      margin: 0 0 16px;
+      padding-bottom: 10px;
+      color: var(--detalle);
+      border-bottom: 1px solid var(--line);
+      font-size: clamp(1.22rem, 2vw, 1.6rem);
+      line-height: 1.2;
+      font-weight: 800;
+      letter-spacing: 0;
+    }
+
+    .article-section p {
+      margin: 0 0 18px;
+      color: var(--onyx);
+      font-size: 1.02rem;
+    }
+
+    .article-section p:last-child { margin-bottom: 0; }
+
+    .quote-box {
+      margin: 28px 0;
+      padding: 24px;
+      background: rgba(168, 51, 50, 0.07);
+      border-left: 5px solid var(--detalle-2);
+      color: var(--onyx);
+      font-size: 1.05rem;
+      font-style: italic;
+      line-height: 1.75;
+    }
+
+    .gallery-box {
+      margin-top: 8px;
+      padding: 28px;
+      background: var(--card-bg-2);
+      border: 1px solid var(--line);
+      border-top: 5px solid var(--detalle);
+      scroll-margin-top: 28px;
+    }
+
+    .gallery-box h2 {
+      margin: 0 0 18px;
+      color: var(--detalle);
+      font-size: 1.1rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .gallery-item {
+      margin: 0;
+      background: #ffffff;
+      border: 1px solid var(--soft-line);
+    }
+
+    .gallery-item img {
+      display: block;
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      background: #eef4ee;
+    }
+
+    .gallery-item:first-child img {
+      object-fit: contain;
+      padding: 10px;
+      background: #dcebdd;
+    }
+
+    .gallery-wide {
+      grid-column: 1 / -1;
+    }
+
+    .gallery-wide img {
+      aspect-ratio: 16 / 10;
+      object-fit: cover;
+    }
+
+    .gallery-item figcaption {
+      padding: 12px 14px;
+      color: var(--muted);
+      font-size: 0.9rem;
+      font-weight: 700;
+      line-height: 1.35;
+    }
+
+    .student-box {
+      display: grid;
+      grid-template-columns: 150px 1fr;
+      gap: 22px;
+      align-items: center;
+      margin-top: 20px;
+      padding: 22px;
+      background: rgba(255,255,255,0.82);
+      border: 1px solid var(--soft-line);
+    }
+
+    .student-photo {
+      width: 150px;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      border: 4px solid var(--detalle);
+      background: #ffffff;
+      box-shadow: 0 10px 26px rgba(30, 48, 37, 0.16);
+    }
+
+    .student-box p {
+      margin: 0;
+      color: var(--onyx);
+      font-size: 1rem;
+    }
+
+    .article-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      margin-top: 34px;
+    }
+
+    .article-button {
+      appearance: none;
+      border: 1px solid var(--detalle);
+      background: var(--detalle);
+      color: #ffffff;
+      cursor: pointer;
+      padding: 12px 18px;
+      font: inherit;
+      font-size: 0.82rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: background 160ms ease, color 160ms ease, transform 160ms ease;
+    }
+
+    .article-button:hover {
+      background: transparent;
+      color: var(--detalle);
+      transform: translateY(-1px);
+    }
+
+    @media (max-width: 760px) {
+      .article-meta,
+      .gallery-grid,
+      .student-box {
+        grid-template-columns: 1fr;
+      }
+
+      .gallery-wide { grid-column: auto; }
+      .gallery-wide img { aspect-ratio: 1 / 1; }
+      .student-photo { width: 140px; }
+    }
+
+    @media (max-width: 640px) {
+      .article-page { padding: 22px 12px; }
+      .article-card { padding: 30px 20px; }
+      .article-index,
+      .gallery-box { padding: 18px; }
+      .student-box { padding: 18px; }
+      .article-actions { justify-content: stretch; }
+      .article-button { width: 100%; }
+    }
+
+    @media print {
+      body { background: #ffffff; }
+      .article-page { padding: 0; }
+      .article-card {
+        box-shadow: none;
+        border: none;
+      }
+      .article-actions { display: none; }
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="article-page">
+    <div class="article-container">
+      <article class="article-card">
+
+        <p class="article-kicker">Muestra</p>
+
+        <h1 class="article-title">
+          Si algo me pasa, ya saben quién fue
+        </h1>
+
+        <p class="article-author">
+          Pardini Magali
+        </p>
+
+        <div class="article-meta" aria-label="Datos de la propuesta">
+          <div class="meta-item">
+            <span class="meta-label">Muestra</span>
+            <span class="meta-value">Florecen Pañuelos, Florecen Voces</span>
+          </div>
+
+          <div class="meta-item">
+            <span class="meta-label">Asignatura</span>
+            <span class="meta-value">Taller de Diseño III, orientación Textil</span>
+          </div>
+
+          <div class="meta-item">
+            <span class="meta-label">Docentes</span>
+            <span class="meta-value">Daniela Tosar, Cecilia Dorado y Natalia López</span>
+          </div>
+
+          <div class="meta-item">
+            <span class="meta-label">Técnica</span>
+            <span class="meta-value">Estampado por sublimación</span>
+          </div>
+        </div>
+
+        <div class="article-divider"></div>
+
+        <p class="article-intro">
+          La propuesta toma como eje la historia de Julia Chuñil y plantea que la lucha de las mujeres no se reduce
+          a una frontera: se extiende como un hilo común desde el Atlántico hasta el Pacífico y más allá.
+        </p>
+
+        <nav class="article-index" aria-label="Índice del artículo">
+          <h2>Índice</h2>
+          <ul>
+            <li><a href="#propuesta">La propuesta del pañuelo</a></li>
+            <li><a href="#julia">Julia Chuñil y la memoria</a></li>
+            <li><a href="#fronteras">Una lucha sin fronteras</a></li>
+            <li><a href="#reflexion">Reflexión de la actividad</a></li>
+            <li><a href="#galeria">Galería del pañuelo</a></li>
+          </ul>
+        </nav>
+
+        <div class="article-content">
+
+          <section id="propuesta" class="article-section">
+            <h2>La propuesta del pañuelo</h2>
+
+            <p>
+              El pañuelo surge de una mirada internacionalista sobre la lucha de las mujeres. Desde esa perspectiva,
+              la pieza encuentra su tema en Julia Chuñil: mujer marrona, indígena, mapuche, chilena, madre, curandera
+              y referente de su comunidad.
+            </p>
+
+            <p>
+              El diseño reúne bosque, territorio, memoria y denuncia. La imagen trabaja con símbolos vinculados a la
+              tierra y a la presencia de Julia, construyendo una superficie textil que pide justicia y se resiste al
+              olvido.
+            </p>
+          </section>
+
+          <section id="julia" class="article-section">
+            <h2>Julia Chuñil y la memoria</h2>
+
+            <p>
+              Julia defendió bosques nativos y tierras ancestrales en las comunas de Máfil y Los Lagos. Su historia
+              aparece en el pañuelo como un reclamo frente al abandono estatal, la violencia y la impunidad.
+            </p>
+
+            <p>
+              La frase que da título a la pieza, <em>Si algo me pasa, ya saben quién fue</em>, condensa el tono de
+              alerta y denuncia que atraviesa la propuesta. El pañuelo funciona así como un soporte de memoria para
+              nombrarla y sostener su lucha.
+            </p>
+          </section>
+
+          <section id="fronteras" class="article-section">
+            <h2>Una lucha sin fronteras</h2>
+
+            <p>
+              La propuesta plantea que el Estado que violenta, la justicia patriarcal y las complicidades que
+              desamparan a las mujeres operan como formas de opresión que no reconocen fronteras.
+            </p>
+
+            <p>
+              Frente a eso, el pañuelo afirma una contracara colectiva: un hilo de lucha que une a mujeres de
+              distintos territorios y mantiene vivo el pedido de justicia por Julia Chuñil.
+            </p>
+          </section>
+
+          <section id="reflexion" class="article-section">
+            <h2>Reflexión de la actividad</h2>
+
+            <div class="quote-box">
+              Me sirvió mucho para visibilizar el caso: mucha gente recién supo de Julia gracias a que lo hice y
+              hablé de ella. Eso me hace pensar en que realmente no estamos muertas mientras se recuerden nuestros
+              nombres.
+            </div>
+
+            <p>
+              La pieza deja al diseño como una práctica capaz de activar memoria, conversación y denuncia pública.
+              Hacer visible un nombre también es una forma de sostener una lucha.
+            </p>
+          </section>
+
+          <section id="galeria" class="gallery-box">
+            <h2>Galería del pañuelo</h2>
+
+            <div class="gallery-grid">
+              <figure class="gallery-item">
+                <img src="assets/images/pardini-panuelo-abierto.png" alt="Pañuelo abierto completo con bosque, territorio y ave" />
+                <figcaption>Pañuelo abierto completo</figcaption>
+              </figure>
+
+              <figure class="gallery-item">
+                <img src="assets/images/pardini-panuelo-cabeza.png" alt="Pañuelo usado sobre la cabeza" />
+                <figcaption>Modo de uso: cabeza</figcaption>
+              </figure>
+
+              <figure class="gallery-item">
+                <img src="assets/images/pardini-panuelo-muneca.png" alt="Pañuelo usado atado en la muñeca durante una marcha" />
+                <figcaption>Modo de uso: muñeca</figcaption>
+              </figure>
+
+              <figure class="gallery-item gallery-wide">
+                <img src="assets/images/pardini-panuelo-rostro.png" alt="Pañuelo usado cubriendo el rostro en contexto de marcha" />
+                <figcaption>Modo de uso: rostro</figcaption>
+              </figure>
+            </div>
+
+            <div class="student-box">
+              <img src="assets/images/pardini-magali-retrato.jpeg" alt="Retrato de Pardini Magali" class="student-photo" />
+              <p>
+                Propuesta realizada por Pardini Magali en el marco de Taller de Diseño III, orientación Textil. Tecnicatura 
+                en Diseño Industrial. Asignatura a cargo de DT Cecilia Dorado, DT Daniela Tosar y DI Natalia López.
+              </p>
+            </div>
+          </section>
+
+        </div>
+
+        <div class="article-actions">
+          <button class="article-button" type="button" onclick="window.print()">
+            Imprimir / Guardar PDF
+          </button>
+        </div>
+
+      </article>
+    </div>
+  </main>
+
+  <script>
+    document.querySelectorAll('a[href^="#"]').forEach(function (link) {
+      link.addEventListener("click", function (event) {
+        var target = document.querySelector(this.getAttribute("href"));
+        if (!target) return;
+
+        event.preventDefault();
+        target.scrollIntoView({
+          behavior: "smooth",
+          block: "start"
+        });
+      });
+    });
+  </script>
+</body>
+</html>
