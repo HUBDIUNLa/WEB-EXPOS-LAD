@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Técnicas, tecnologías y procesos de producción</title>
+  <meta name="description" content="Técnicas, tecnologías y procesos de producción de la muestra Florecen Pañuelos, Florecen Voces." />
+
+  <style>
+    :root {
+      --detalle: #4f7f78;
+      --detalle-2: #c49a4b;
+      --onyx: #2d3433;
+      --card-bg: #f4faf8;
+      --card-bg-2: #ffffff;
+      --muted: #63706d;
+      --line: rgba(79, 127, 120, 0.28);
+      --soft-line: rgba(79, 127, 120, 0.14);
+      --shadow: rgba(35, 52, 49, 0.16);
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      background: linear-gradient(180deg, #eef8f5 0%, #ffffff 45%, #fbf7ef 100%);
+      color: var(--onyx);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.68;
+    }
+
+    .article-page {
+      width: 100%;
+      padding: 48px 18px;
+    }
+
+    .article-container {
+      max-width: 980px;
+      margin: 0 auto;
+    }
+
+    .article-card {
+      position: relative;
+      overflow: hidden;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.94), rgba(244,250,248,0.98)),
+        var(--card-bg);
+      border: 1px solid var(--line);
+      box-shadow: 0 22px 60px var(--shadow);
+      padding: clamp(28px, 5vw, 64px);
+    }
+
+    .article-card::before {
+      content: "";
+      position: absolute;
+      inset: 0 0 auto 0;
+      height: 9px;
+      background: linear-gradient(90deg, var(--detalle), var(--detalle-2));
+    }
+
+    .article-kicker {
+      margin: 0 0 18px;
+      color: var(--detalle);
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .article-title {
+      max-width: 860px;
+      margin: 0;
+      color: var(--onyx);
+      font-size: clamp(1.35rem, 3vw, 2.7rem);
+      line-height: 1;
+      font-weight: 800;
+      letter-spacing: 0;
+    }
+
+    .article-author {
+      margin: 22px 0 0;
+      color: var(--detalle);
+      font-size: clamp(1rem, 2vw, 1.24rem);
+      font-weight: 700;
+    }
+
+    .article-meta {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin: 28px 0 0;
+    }
+
+    .meta-item {
+      padding: 14px 16px;
+      background: rgba(255,255,255,0.76);
+      border: 1px solid var(--soft-line);
+    }
+
+    .meta-label {
+      display: block;
+      color: var(--detalle);
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .meta-value {
+      display: block;
+      margin-top: 4px;
+      color: var(--onyx);
+      font-size: 0.96rem;
+      font-weight: 700;
+      line-height: 1.35;
+    }
+
+    .article-divider {
+      width: 100%;
+      height: 1px;
+      margin: 34px 0;
+      background: linear-gradient(90deg, var(--detalle), var(--line), transparent);
+    }
+
+    .article-intro {
+      margin: 0;
+      max-width: 820px;
+      color: var(--onyx);
+      font-size: clamp(1.05rem, 1.6vw, 1.22rem);
+      line-height: 1.75;
+    }
+
+    .article-index {
+      margin: 38px 0;
+      padding: 22px;
+      background: rgba(255,255,255,0.72);
+      border: 1px solid var(--soft-line);
+      border-left: 5px solid var(--detalle);
+    }
+
+    .article-index h2 {
+      margin: 0 0 14px;
+      color: var(--detalle);
+      font-size: 0.86rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .article-index ul {
+      display: grid;
+      gap: 8px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .article-index a {
+      color: var(--onyx);
+      font-size: 0.98rem;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .article-index a::before {
+      content: "-";
+      color: var(--detalle);
+      margin-right: 8px;
+    }
+
+    .article-index a:hover {
+      color: var(--detalle);
+      text-decoration: underline;
+      text-underline-offset: 4px;
+    }
+
+    .article-content {
+      display: grid;
+      gap: 34px;
+    }
+
+    .article-section {
+      scroll-margin-top: 28px;
+    }
+
+    .article-section h2 {
+      margin: 0 0 16px;
+      padding-bottom: 10px;
+      color: var(--detalle);
+      border-bottom: 1px solid var(--line);
+      font-size: clamp(1.22rem, 2vw, 1.6rem);
+      line-height: 1.2;
+      font-weight: 800;
+      letter-spacing: 0;
+    }
+
+    .article-section h3 {
+      margin: 24px 0 10px;
+      color: var(--onyx);
+      font-size: 1.05rem;
+      font-weight: 800;
+      letter-spacing: 0;
+    }
+
+    .article-section p {
+      margin: 0 0 18px;
+      color: var(--onyx);
+      font-size: 1.02rem;
+    }
+
+    .article-section p:last-child { margin-bottom: 0; }
+
+    .quote-box {
+      margin: 28px 0;
+      padding: 24px;
+      background: rgba(79, 127, 120, 0.07);
+      border-left: 5px solid var(--detalle);
+      color: var(--onyx);
+      font-size: 1.05rem;
+      font-style: italic;
+      line-height: 1.75;
+    }
+
+    .process-box {
+      margin-top: 18px;
+      padding: 24px;
+      background: var(--card-bg-2);
+      border: 1px solid var(--line);
+      border-top: 5px solid var(--detalle);
+    }
+
+    .process-box h3 {
+      margin-top: 0;
+      color: var(--detalle);
+    }
+
+    .process-list,
+    .feature-list {
+      display: grid;
+      gap: 10px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .process-list { counter-reset: process; }
+
+    .process-list li,
+    .feature-list li {
+      position: relative;
+      padding: 12px 14px 12px 42px;
+      background: rgba(255,255,255,0.74);
+      border: 1px solid var(--soft-line);
+      color: var(--onyx);
+      font-size: 0.98rem;
+      font-weight: 700;
+      line-height: 1.35;
+    }
+
+    .process-list li::before {
+      counter-increment: process;
+      content: counter(process);
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      display: grid;
+      width: 20px;
+      height: 20px;
+      place-items: center;
+      background: var(--detalle);
+      color: #ffffff;
+      font-size: 0.74rem;
+      font-weight: 800;
+      line-height: 1;
+    }
+
+    .feature-list li::before {
+      content: "";
+      position: absolute;
+      top: 18px;
+      left: 18px;
+      width: 8px;
+      height: 8px;
+      background: var(--detalle);
+    }
+
+    .article-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      margin-top: 34px;
+    }
+
+    .article-button {
+      appearance: none;
+      border: 1px solid var(--detalle);
+      background: var(--detalle);
+      color: #ffffff;
+      cursor: pointer;
+      padding: 12px 18px;
+      font: inherit;
+      font-size: 0.82rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: background 160ms ease, color 160ms ease, transform 160ms ease;
+    }
+
+    .article-button:hover {
+      background: transparent;
+      color: var(--detalle);
+      transform: translateY(-1px);
+    }
+
+    @media (max-width: 760px) {
+      .article-meta { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 640px) {
+      .article-page { padding: 22px 12px; }
+      .article-card { padding: 30px 20px; }
+      .article-index,
+      .process-box { padding: 18px; }
+      .article-actions { justify-content: stretch; }
+      .article-button { width: 100%; }
+    }
+
+    @media print {
+      body { background: #ffffff; }
+      .article-page { padding: 0; }
+      .article-card {
+        box-shadow: none;
+        border: none;
+      }
+      .article-actions { display: none; }
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="article-page">
+    <div class="article-container">
+      <article class="article-card">
+
+        <p class="article-kicker">Muestra</p>
+
+        <h1 class="article-title">Técnicas, tecnologías y procesos de producción</h1>
+
+        <p class="article-author">Florecen Pañuelos, Florecen Voces</p>
+
+        <div class="article-meta" aria-label="Datos del proceso">
+          <div class="meta-item">
+            <span class="meta-label">Área</span>
+            <span class="meta-value">Taller de Diseño 3 - Orientación Textil</span>
+            <span class="meta-value">Tecnicatura de Diseño Industrial UNLa</span>
+          </div>
+
+          <div class="meta-item">
+            <span class="meta-label">Tecnología</span>
+            <span class="meta-value">Sublimación textil</span>
+          </div>
+
+          <div class="meta-item">
+            <span class="meta-label">Soporte</span>
+            <span class="meta-value">Tela Sirén de poliéster</span>
+          </div>
+
+          <div class="meta-item">
+            <span class="meta-label">Producción</span>
+            <span class="meta-value">Diseño digital, transferencia térmica y terminación textil</span>
+          </div>
+        </div>
+
+        <div class="article-divider"></div>
+
+        <p class="article-intro">
+          La realización de los pañuelos partió de un proceso de investigación, análisis y construcción conceptual
+          orientado a traducir contenidos culturales, históricos y sociales en piezas textiles portadoras de significado.
+        </p>
+
+        <nav class="article-index" aria-label="Índice del artículo">
+          <h2>Índice</h2>
+          <ul>
+            <li><a href="#imagen-textil">Diseño y desarrollo de la imagen textil</a></li>
+            <li><a href="#concepto-objeto">Del concepto al objeto</a></li>
+            <li><a href="#sublimacion">Tecnología de sublimación textil</a></li>
+            <li><a href="#proceso">Proceso productivo</a></li>
+            <li><a href="#materialidad">Materialidad y características textiles</a></li>
+            <li><a href="#objeto">El objeto como soporte de significado</a></li>
+            <li><a href="#patrimonio">Diseño, tecnología y patrimonio</a></li>
+          </ul>
+        </nav>
+
+        <div class="article-content">
+
+          <section id="imagen-textil" class="article-section">
+            <h2>Diseño y desarrollo de la imagen textil</h2>
+
+            <p>
+              Los pañuelos expuestos fueron desarrollados a partir de la exploración de recursos gráficos y textiles que
+              permitieron transformar conceptos e investigaciones en piezas visuales portadoras de significado.
+            </p>
+
+            <p>
+              El proceso involucró distintas etapas de diseño, desde la investigación temática y la construcción de una
+              narrativa visual hasta la producción material del objeto textil. En esta instancia se integraron recursos
+              de ilustración, composición, color, fotografía y tratamiento de imagen.
+            </p>
+
+            <p>
+              El diseño de superficie textil requirió considerar variables específicas del soporte, tales como escala,
+              repetición, continuidad visual, comportamiento de los colores sobre el tejido y relación entre imagen,
+              materialidad y uso.
+            </p>
+          </section>
+
+          <section id="concepto-objeto" class="article-section">
+            <h2>Del concepto al objeto</h2>
+
+            <p>
+              La producción de cada pañuelo implicó la articulación entre investigación, diseño, tecnología y
+              materialidad. De este modo, las piezas resultantes no solo funcionan como objetos textiles, sino también
+              como soportes de expresión, reflexión y comunicación visual.
+            </p>
+
+            <div class="quote-box">
+              Cada pieza fue concebida como un sistema visual donde el diseño y el textil constituyen una unidad
+              inseparable.
+            </div>
+          </section>
+
+          <section id="sublimacion" class="article-section">
+            <h2>Tecnología de sublimación textil</h2>
+
+            <p>
+              La producción de las estampas se realizó mediante impresión por sublimación, una tecnología de
+              transferencia térmica ampliamente utilizada en la industria textil contemporánea por su precisión,
+              durabilidad y calidad cromática.
+            </p>
+
+            <p>
+              El procedimiento consiste en imprimir previamente el diseño sobre un papel de transferencia utilizando
+              tintas especiales de sublimación. Luego, mediante la aplicación controlada de calor y presión, las tintas
+              experimentan un proceso físico de sublimación: pasan directamente de estado sólido a gaseoso y se
+              incorporan a las fibras del tejido.
+            </p>
+
+            <p>
+              A diferencia de otros métodos de impresión, la imagen no permanece sobre la superficie de la tela, sino
+              que pasa a formar parte de su estructura. Esto permite obtener colores intensos, alta definición, gran
+              resistencia al desgaste y excelente estabilidad frente al lavado y al uso continuado.
+            </p>
+          </section>
+
+          <section id="proceso" class="article-section">
+            <h2>Proceso productivo</h2>
+
+            <p>
+              La materialización de cada pañuelo involucró distintas etapas técnicas que permitieron garantizar la
+              fidelidad entre la propuesta proyectual y el resultado material.
+            </p>
+
+            <div class="process-box">
+              <h3>Etapas de producción</h3>
+              <ol class="process-list">
+                <li>Investigación y desarrollo conceptual.</li>
+                <li>Diseño digital y adaptación de originales al formato textil.</li>
+                <li>Preparación de archivos para impresión.</li>
+                <li>Impresión de pruebas y calibración cromática.</li>
+                <li>Impresión sobre papel de sublimación.</li>
+                <li>Transferencia térmica mediante prensa de calor.</li>
+                <li>Corte, terminación y control de calidad de las piezas finales.</li>
+              </ol>
+            </div>
+          </section>
+
+          <section id="materialidad" class="article-section">
+            <h2>Materialidad y características textiles</h2>
+
+            <p>
+              La sublimación textil requiere soportes compuestos principalmente por fibras sintéticas, especialmente
+              poliéster, debido a su capacidad para incorporar las tintas mediante procesos de transferencia térmica.
+            </p>
+
+            <p>
+              Entre los textiles más utilizados para esta tecnología se encuentran el satén poliéster, el crepe, la
+              microfibra, el voile, la gasa poliéster, el jersey y diversos tejidos técnicos destinados a aplicaciones
+              gráficas y de indumentaria.
+            </p>
+
+            <div class="process-box">
+              <h3>Características de la sublimación textil</h3>
+              <ul class="feature-list">
+                <li>Buena definición de imagen y nitidez de impresión.</li>
+                <li>Resistencia al desgaste y a los lavados frecuentes.</li>
+                <li>Ligereza y flexibilidad para su uso como pañuelo.</li>
+                <li>Estabilidad dimensional y conservación del color.</li>
+                <li>Integración de la estampa a la fibra mediante sublimación.</li>
+              </ul>
+            </div>
+
+            <p>
+              Para la realización de los pañuelos de esta exposición se seleccionó tela Sirén de poliéster, un tejido
+              caracterizado por su ligereza, suavidad y excelente respuesta a los procesos de sublimación.
+            </p>
+
+            <p>
+              Su estructura permite obtener impresiones de alta definición, con colores intensos y una reproducción
+              precisa de detalles, gradientes y texturas gráficas. La elección de este material respondió tanto a
+              criterios técnicos como estéticos: su caída fluida y su superficie uniforme favorecen la integración entre
+              imagen y soporte.
+            </p>
+          </section>
+
+          <section id="objeto" class="article-section">
+            <h2>El objeto como soporte de significado</h2>
+
+            <p>
+              La decisión de emplazar los contenidos visuales sobre un objeto textil responde a la comprensión del
+              diseño como una práctica que articula materialidad, comunicación y experiencia.
+            </p>
+
+            <p>
+              A diferencia de una imagen presentada únicamente en formato gráfico o digital, el pañuelo introduce una
+              dimensión física que habilita nuevas formas de interacción, circulación y apropiación por parte de las
+              personas.
+            </p>
+
+            <p>
+              El objeto textil funciona simultáneamente como soporte material y como vehículo simbólico. Su condición
+              de elemento cotidiano, portable y cercano al cuerpo permite que los contenidos representados trasciendan
+              el espacio expositivo y se incorporen a la vida social.
+            </p>
+          </section>
+
+          <section id="patrimonio" class="article-section">
+            <h2>Diseño, tecnología y patrimonio</h2>
+
+            <p>
+              La producción de los pañuelos pone en diálogo investigación, diseño textil, diseño de indumentaria y
+              accesorios, tecnología de impresión y conocimiento textil.
+            </p>
+
+            <p>
+              Cada pieza constituye el resultado de un proceso interdisciplinario en el que los recursos tecnológicos
+              contemporáneos permiten transformar contenidos culturales e históricos en objetos textiles capaces de
+              comunicar, representar y preservar memorias a través del diseño.
+            </p>
+
+            <p>
+              En este contexto, la sublimación se presenta como una herramienta que vincula los procesos proyectuales
+              del diseño con las posibilidades productivas de la industria textil, habilitando nuevas formas de
+              representación y circulación de contenidos culturales sobre soportes textiles.
+            </p>
+          </section>
+
+        </div>
+
+        <div class="article-actions">
+          <button class="article-button" type="button" onclick="window.print()">
+            Imprimir / Guardar PDF
+          </button>
+        </div>
+
+      </article>
+    </div>
+  </main>
+
+  <script>
+    document.querySelectorAll('a[href^="#"]').forEach(function (link) {
+      link.addEventListener("click", function (event) {
+        var target = document.querySelector(this.getAttribute("href"));
+        if (!target) return;
+
+        event.preventDefault();
+        target.scrollIntoView({
+          behavior: "smooth",
+          block: "start"
+        });
+      });
+    });
+  </script>
+</body>
+</html>

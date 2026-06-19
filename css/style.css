@@ -736,3 +736,69 @@ h6 {
     grid-template-columns: 1fr;
   }
 }
+
+.resources-intro-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 300px;
+  gap: 42px;
+  align-items: center;
+}
+
+.resources-intro-actions {
+  display: grid;
+  gap: 14px;
+  justify-self: end;
+  align-self: center;
+  width: 100%;
+  max-width: 300px;
+}
+
+.intro-action-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 60px;
+  padding: 14px 18px;
+  border: 0;
+  background: #020b08;
+  color: #ffffff;
+  font-family: "Roboto Mono", monospace;
+  font-size: 1rem;
+  font-weight: 800;
+  line-height: 1.15;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  box-shadow: none;
+  transition: background 160ms ease, color 160ms ease, transform 160ms ease;
+}
+
+.intro-action-button:hover {
+  background: #ffffff;
+  color: #020b08;
+  transform: translateY(-1px);
+}
+
+@media (max-width: 900px) {
+  .resources-intro-layout {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .resources-intro-actions {
+    justify-self: stretch;
+    max-width: none;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .resources-intro-actions {
+    grid-template-columns: 1fr;
+  }
+
+  .intro-action-button {
+    min-height: 54px;
+  }
+}
