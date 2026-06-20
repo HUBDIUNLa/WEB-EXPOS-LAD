@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Asignatura y equipo docente - Florecen Pañuelos</title>
+  <meta name="description" content="Marco académico, asignatura, Laboratorio de Diseño LAD y equipo docente de la muestra Florecen Pañuelos, Florecen Voces." />
+
+  <style>
+    :root {
+      --detalle: #4f7f78;
+      --detalle-2: #c49a4b;
+      --onyx: #2d3433;
+      --card-bg: #f4faf8;
+      --card-bg-2: #ffffff;
+      --muted: #63706d;
+      --line: rgba(79, 127, 120, 0.28);
+      --soft-line: rgba(79, 127, 120, 0.14);
+      --shadow: rgba(35, 52, 49, 0.16);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      background: linear-gradient(180deg, #eef8f5 0%, #ffffff 45%, #fbf7ef 100%);
+      color: var(--onyx);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.68;
+    }
+
+    .unla-page-brand {
+      width: 100%;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      padding: 14px 28px;
+      background: #000000;
+    }
+
+    .unla-brand-link {
+      display: inline-flex;
+      align-items: center;
+      text-decoration: none;
+    }
+
+    .unla-brand-link img {
+      display: block;
+      width: 90px;
+      max-width: 90px;
+      height: auto;
+    }
+
+    .article-page {
+      width: 100%;
+      padding: 48px 18px;
+    }
+
+    .article-container {
+      max-width: 980px;
+      margin: 0 auto;
+    }
+
+    .article-card {
+      position: relative;
+      overflow: hidden;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.94), rgba(244, 250, 248, 0.98)),
+        var(--card-bg);
+      border: 1px solid var(--line);
+      box-shadow: 0 22px 60px var(--shadow);
+      padding: clamp(28px, 5vw, 64px);
+    }
+
+    .article-card::before {
+      content: "";
+      position: absolute;
+      inset: 0 0 auto 0;
+      height: 9px;
+      background: linear-gradient(90deg, var(--detalle), var(--detalle-2));
+    }
+
+    .article-kicker {
+      margin: 0 0 18px;
+      color: var(--detalle);
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .article-title {
+      max-width: 860px;
+      margin: 0;
+      color: var(--onyx);
+      font-size: clamp(1.35rem, 3vw, 2.7rem);
+      line-height: 1;
+      font-weight: 800;
+      letter-spacing: 0;
+    }
+
+    .article-author {
+      margin: 22px 0 0;
+      color: var(--detalle);
+      font-size: clamp(1rem, 2vw, 1.24rem);
+      font-weight: 700;
+    }
+
+    .article-meta {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin: 28px 0 0;
+    }
+
+    .meta-item {
+      padding: 14px 16px;
+      background: rgba(255, 255, 255, 0.76);
+      border: 1px solid var(--soft-line);
+    }
+
+    .meta-label {
+      display: block;
+      color: var(--detalle);
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .meta-value {
+      display: block;
+      margin-top: 4px;
+      color: var(--onyx);
+      font-size: 0.96rem;
+      font-weight: 700;
+      line-height: 1.35;
+    }
+
+    .article-divider {
+      width: 100%;
+      height: 1px;
+      margin: 34px 0;
+      background: linear-gradient(90deg, var(--detalle), var(--line), transparent);
+    }
+
+    .article-intro {
+      margin: 0;
+      max-width: 820px;
+      color: var(--onyx);
+      font-size: clamp(1.05rem, 1.6vw, 1.22rem);
+      line-height: 1.75;
+    }
+
+    .article-index {
+      margin: 38px 0;
+      padding: 22px;
+      background: rgba(255, 255, 255, 0.72);
+      border: 1px solid var(--soft-line);
+      border-left: 5px solid var(--detalle);
+    }
+
+    .article-index h2 {
+      margin: 0 0 14px;
+      color: var(--detalle);
+      font-size: 0.86rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .article-index ul {
+      display: grid;
+      gap: 8px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .article-index a {
+      color: var(--onyx);
+      font-size: 0.98rem;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .article-index a::before {
+      content: "-";
+      color: var(--detalle);
+      margin-right: 8px;
+    }
+
+    .article-index a:hover {
+      color: var(--detalle);
+      text-decoration: underline;
+      text-underline-offset: 4px;
+    }
+
+    .article-content {
+      display: grid;
+      gap: 34px;
+    }
+
+    .article-section {
+      scroll-margin-top: 28px;
+    }
+
+    .article-section h2 {
+      margin: 0 0 16px;
+      padding-bottom: 10px;
+      color: var(--detalle);
+      border-bottom: 1px solid var(--line);
+      font-size: clamp(1.22rem, 2vw, 1.6rem);
+      line-height: 1.2;
+      font-weight: 800;
+      letter-spacing: 0;
+    }
+
+    .article-section p {
+      margin: 0 0 18px;
+      color: var(--onyx);
+      font-size: 1.02rem;
+    }
+
+    .article-section p:last-child { margin-bottom: 0; }
+
+    .quote-box {
+      margin: 28px 0;
+      padding: 24px;
+      background: rgba(79, 127, 120, 0.07);
+      border-left: 5px solid var(--detalle);
+      color: var(--onyx);
+      font-size: 1.05rem;
+      font-style: italic;
+      line-height: 1.75;
+    }
+
+    .feature-list {
+      display: grid;
+      gap: 10px;
+      margin: 18px 0 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .feature-list li {
+      position: relative;
+      padding: 12px 14px 12px 42px;
+      background: rgba(255, 255, 255, 0.74);
+      border: 1px solid var(--soft-line);
+      color: var(--onyx);
+      font-size: 0.98rem;
+      font-weight: 700;
+      line-height: 1.35;
+    }
+
+    .feature-list li::before {
+      content: "";
+      position: absolute;
+      top: 18px;
+      left: 18px;
+      width: 8px;
+      height: 8px;
+      background: var(--detalle);
+    }
+
+    .profile-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+      margin: 24px 0 0;
+    }
+
+    .profile-card {
+      background: var(--card-bg-2);
+      border: 1px solid var(--soft-line);
+    }
+
+    .profile-card img {
+      display: block;
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      background: #eef4f2;
+    }
+
+    .profile-card figcaption {
+      padding: 12px 14px;
+      color: var(--muted);
+      font-size: 0.9rem;
+      font-weight: 700;
+      line-height: 1.35;
+    }
+
+    .bio-box {
+      margin-top: 18px;
+      padding: 24px;
+      background: var(--card-bg-2);
+      border: 1px solid var(--line);
+      border-top: 5px solid var(--detalle);
+    }
+
+    .bio-box h3 {
+      margin: 0 0 12px;
+      color: var(--detalle);
+      font-size: 1.05rem;
+      font-weight: 800;
+      letter-spacing: 0;
+    }
+
+    .article-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      margin-top: 34px;
+    }
+
+    .article-button {
+      appearance: none;
+      border: 1px solid var(--detalle);
+      background: var(--detalle);
+      color: #ffffff;
+      cursor: pointer;
+      padding: 12px 18px;
+      font: inherit;
+      font-size: 0.82rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: background 160ms ease, color 160ms ease, transform 160ms ease;
+    }
+
+    .article-button:hover {
+      background: transparent;
+      color: var(--detalle);
+      transform: translateY(-1px);
+    }
+
+    @media (max-width: 760px) {
+      .article-meta,
+      .profile-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .unla-page-brand { padding: 12px 18px; }
+      .unla-brand-link img { width: 50px; max-width: 70px; }
+      .article-page { padding: 22px 12px; }
+      .article-card { padding: 30px 20px; }
+      .article-index,
+      .bio-box { padding: 18px; }
+      .article-actions { justify-content: stretch; }
+      .article-button { width: 100%; }
+    }
+
+    @media print {
+      body { background: #ffffff; }
+      .unla-page-brand { display: none; }
+      .article-page { padding: 0; }
+      .article-card { box-shadow: none; border: none; }
+      .article-actions { display: none; }
+      a { color: inherit; text-decoration: none; }
+    }
+
+    .docente-list {
+  display: grid;
+  gap: 22px;
+  margin-top: 24px;
+}
+
+.docente-card {
+  display: grid;
+  grid-template-columns: 180px minmax(0, 1fr);
+  gap: 28px;
+  align-items: center;
+  padding: 24px;
+  background: rgba(255, 255, 255, 0.82);
+  border: 1px solid var(--soft-line);
+}
+
+.docente-photo-box img {
+  display: block;
+  width: 180px;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border: 4px solid var(--detalle);
+  background: #ffffff;
+  box-shadow: 0 10px 26px rgba(35, 52, 49, 0.16);
+}
+
+.docente-bio-box {
+  padding: 22px;
+  background: #ffffff;
+  border: 1px solid var(--soft-line);
+}
+
+.docente-bio-box h3 {
+  margin: 0 0 12px;
+  color: var(--detalle);
+  font-size: 1.08rem;
+  font-weight: 800;
+}
+
+.docente-bio-box p {
+  margin: 0;
+  color: var(--onyx);
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+@media (max-width: 760px) {
+  .docente-card {
+    grid-template-columns: 1fr;
+  }
+
+  .docente-photo-box img {
+    width: 150px;
+  }
+}
+  </style>
+</head>
+
+<body>
+  <header class="unla-page-brand" aria-label="Universidad Nacional de Lanús">
+    <a href="index.html" class="unla-brand-link">
+      <img src="assets/images/Logo UNLA Blanco.png" alt="Universidad Nacional de Lanús" />
+    </a>
+  </header>
+
+  <main class="article-page">
+    <div class="article-container">
+      <article class="article-card">
+
+        <p class="article-kicker">Muestra</p>
+
+        <h1 class="article-title">
+          Asignatura y equipo docente
+        </h1>
+
+        <p class="article-author">
+          Florecen Pañuelos, Florecen Voces
+        </p>
+
+        <div class="article-meta" aria-label="Datos de la asignatura">
+          <div class="meta-item">
+            <span class="meta-label">Carrera</span>
+            <span class="meta-value">Tecnicatura en Diseño Industrial</span>
+          </div>
+
+          <div class="meta-item">
+            <span class="meta-label">Orientación</span>
+            <span class="meta-value">Textil</span>
+          </div>
+
+          <div class="meta-item">
+            <span class="meta-label">Asignatura</span>
+            <span class="meta-value">Taller de Diseño III</span>
+          </div>
+
+          <div class="meta-item">
+            <span class="meta-label">Espacio</span>
+            <span class="meta-value">Laboratorio de Diseño LAD - UNLa</span>
+          </div>
+        </div>
+
+        <div class="article-divider"></div>
+
+        <p class="article-intro">
+          La muestra se inscribe en una propuesta académica donde el diseño industrial, el diseño textil y la
+          investigación proyectual se articulan para producir objetos capaces de comunicar, representar y dialogar con
+          problemáticas sociales actuales.
+        </p>
+
+        <nav class="article-index" aria-label="Índice del artículo">
+          <h2>Índice</h2>
+          <ul>
+            <li><a href="#diseno-industrial">Diseño industrial y formación</a></li>
+            <li><a href="#asignatura">Taller de Diseño III</a></li>
+            <li><a href="#trabajo-practico">Trabajo práctico</a></li>
+            <li><a href="#lad">Laboratorio de Diseño LAD</a></li>
+            <li><a href="#equipo">Equipo docente</a></li>
+          </ul>
+        </nav>
+
+        <div class="article-content">
+
+          <section id="diseno-industrial" class="article-section">
+            <h2>Diseño industrial y formación</h2>
+
+            <p>
+              El diseño industrial es una herramienta estratégica del sistema productivo nacional, porque permite que la
+              economía se reactive y, en consecuencia, se incorpore mano de obra a la industria, se mejore el valor de
+              las manufacturas y se compita con éxito frente a los bienes importados.
+            </p>
+
+            <p>
+              Como diseñador o diseñadora es posible proyectar y representar procesos de fabricación ligados a
+              problemáticas y necesidades vinculadas a la comunidad, la región y el país, desde una óptica novedosa y
+              desprendida de viejos postulados.
+            </p>
+
+            <p>
+              La carrera ofrece un título intermedio de técnico con tres orientaciones: Metales Básicos y Productos del
+              Metal; Textil, Prendas de Vestir y del Cuero; y Maquinarias, Equipos y Vehículos Automotores.
+            </p>
+
+            <ul class="feature-list">
+              <li>Adquirir competencias para resolver problemas con una visión reflexiva e integradora.</li>
+              <li>Participar en la formación de PYMES afines a la orientación o integrarse como técnicos en empresas de mayor envergadura.</li>
+              <li>Analizar situaciones de mercado, requerimientos y problemáticas de comercialización vinculadas al mercado interno y al MERCOSUR.</li>
+            </ul>
+          </section>
+
+          <section id="asignatura" class="article-section">
+            <h2>Taller de Diseño III</h2>
+
+            <p>
+              En la materia Taller de Diseño III, orientación textil, de la Tecnicatura en Diseño Industrial, se abordan
+              contenidos teóricos y prácticos en relación con el diseño y las tecnologías de estampado y teñido.
+            </p>
+
+            <p>
+              Los estudiantes concretan proyectos de diseño de series de textiles estampados y/o teñidos, teniendo en
+              cuenta posibilidades y requerimientos técnico-productivos, simbólicos, funcionales y formales, además de
+              tendencias y necesidades del usuario.
+            </p>
+          </section>
+
+          <section id="trabajo-practico" class="article-section">
+            <h2>Trabajo práctico</h2>
+
+            <p>
+              Para el trabajo práctico “Florecen pañuelos, florecen flores”, se realizó hincapié en tecnologías,
+              composición y desarrollo de producto a partir de una estampa única.
+            </p>
+
+            <ul class="feature-list">
+              <li>Abordar tecnologías semi industriales de trabajo en estampería por transferencia.</li>
+              <li>Desarrollar un producto a partir del diseño de una estampa única.</li>
+              <li>Aplicar criterios compositivos propios de estampas emplazadas, considerando la moldería del producto soporte.</li>
+            </ul>
+          </section>
+
+          <section id="lad" class="article-section">
+            <h2>Laboratorio de Diseño LAD</h2>
+
+            <p>
+              En el Laboratorio de Diseño LAD se busca acompañar y articular con las carreras vinculadas al diseño de
+              la Universidad Nacional de Lanús, mediante espacios que permitan visibilizar actividades de I+D,
+              académicas y de experimentación.
+            </p>
+
+            <div class="bio-box">
+              <h3>Laboratorio de Diseño LAD</h3>
+              <p>
+                Desde el LAD se desarrollan herramientas de planificación, diagnóstico, desarrollo y seguimiento de
+                proyectos y emprendimientos. El espacio promueve la gestión del diseño, articula con empresas,
+                instituciones y equipos interdisciplinarios, y participa en proyectos de investigación, desarrollo e
+                innovación vinculados a diseño, tecnología, producción, accesibilidad y discapacidad.
+              </p>
+            </div>
+          </section>
+
+          <section id="equipo" class="article-section">
+  <h2>Equipo docente</h2>
+
+  <p>
+    El equipo docente articula investigación, práctica proyectual, tecnología textil, sustentabilidad y transferencia al
+    medio productivo, acompañando el desarrollo conceptual y material de las propuestas.
+  </p>
+
+  <div class="docente-list">
+
+    <article class="docente-card">
+      <div class="docente-photo-box">
+        <img src="assets/images/bios-docentes-equipo-01.jpeg" alt="Equipo docente de Taller de Diseño 3" />
+      </div>
+
+      <div class="docente-bio-box">
+        <h3>Taller de Diseño 3</h3>
+        <p>
+          Diseñadora Textil con especialidad en Investigación en el área del diseño textil. Actualmente en la dirección de proyecto vinculado a la innovación en sustentabilidad de nuevos biotextiles. Experimentación en la producción de biotextiles biodegradables a partir de descartes orgánicos. Participación en proyectos de investigación sobre incorporación de tecnología portable en textiles e indumentaria. Asimismo, en otros proyectos sobre teñido de cartas de color para textiles en restauración, y elaboración de hilado a partir de la chala de maíz. Profesora adjunta en la Licenciatura en Diseño Industrial, Universidad Nacional de Lanús. Diseñadora en el Centro de Diseño Industrial de Instituto Nacional de Tecnología Industrial. Responsable del Biofablab. Investigación, desarrollo y transferencia al medio productivo. Participación y coordinación en proyectos de sobre diseño sustentable, cadenas de valor y materiales sustentables. Diseñadora Textil FADU UBA. Especialización en Gestión de la Tecnología y la Innovación UNSAM, y Diplomatura en Desarrollo Local y Economía Social FLACSO.
+        </p>
+      </div>
+    </article>
+
+    <article class="docente-card">
+      <div class="docente-photo-box">
+        <img src="assets/images/bios-docentes-equipo-02.jpeg" alt="Equipo docente de Taller de Diseño 3 orientación Textil" />
+      </div>
+
+      <div class="docente-bio-box">
+        <h3>Taller de Diseño 3</h3>
+        <p>
+          Diseñadora Textil. Actualmente se desempeña como docente adjunta de la materia Proyecto Textil 1 a 4, Trabajo Final de Carrera e Introducción al Proyecto pertenecientes a la Carrera de Diseño Textil en FADU-UBA. También es docente de las materias Tecnología, materiales y procesos 2 y 3 (Textil) y Taller Textil 2 y 3 pertenecientes a la carrera Licenciatura de Diseño Industrial orientación textil de UNLa. Desde 2014 participa como investigadora en diversos proyectos de investigación dependientes del Departamento de Humanidades y Artes de UNLa donde se han abordado temáticas tales como desarrollo de cartas de color, diseño de nuevos materiales a partir de descartes, sustentabilidad en la cadena de valor textil.
+        </p>
+      </div>
+    </article>
+
+    <article class="docente-card">
+      <div class="docente-photo-box">
+        <img src="assets/images/bios-docentes-equipo-03.jpeg" alt="Equipo docente de Taller de Diseño 3" />
+      </div>
+
+      <div class="docente-bio-box">
+        <h3>Taller de Diseño 3</h3>
+        <p>
+          Diseñadora industrial, con experiencia en textil e indumentaria.Ayudante de cátedra en la UNLa, en las materias de Tecnología,materiales y procesos, prácticas pre-profesionales. Analista deproducción en una marca de indumentaria, en el ámbito privado. Medesarrollo en el campo de la indumentaria en orientación ycoordinación de proyectos. Responsable en planificación deproducción, teniendo habilidades en diseño y sus tecnologías.Optimizando procesos productivos, para mejorar la eficiencia ycalidad de la producción.
+        </p>
+      </div>
+    </article>
+
+     <article class="docente-card">
+      <div class="docente-photo-box">
+        <img src="assets/images/bios-docentes-lad.png" alt="Laboratorio de Diseño LAD" />
+      </div>
+
+      <div class="docente-bio-box">
+        <h3>Laboratorio de Diseño LAD</h3>
+        <p>
+          Coordinadora General del Laboratorio de Diseño LAD. Especialista en Metodología de la Investigación Científica, Maestranda en esa misma carrera y programadora web, Responsable de la coordinacion de Investigación del Departamento de Humanidades y Artes de la Universidad Nacional de Lanús. Fundadora del HUB de Diseño Industrial de la UNLa, Directora por Diseño Industrial de la Revista académica: DSB-LAD, Diseño sin Barreras, además de ser autora de diversos artículos académicos con referato, libros y capítulos de libros. Directora de Diversos proyectos de Investigación y Becarios. Desarrolla herramientas de planificación, diagnóstico, desarrollo y seguimiento de proyectos y emprendimientos. Promotora de la Gestión del Diseño. Articula con empresas, instituciones y equipos interdisciplinarios. Evaluadora de proyectos de investigación, desarrollo e innovación en diseño, tecnología, producción accesibilidad y Discapacidad. Evaluadora de Tesis de grado y posgrado. Participa en comités científicos de congresos nacionales e internacionales vinculados a diseño, tecnología, accesibilidad y discapacidad. Es docente en la UNLa en carreras de grado y posgrado.
+        </p>
+      </div>
+    </article>
+
+  </div>
+</section>
+          
+          
+          <section id="equipo" class="article-section">
+            
+            <div class="bio-box">
+              <h3>Investigación y producción textil</h3>
+              <p>
+                El equipo desarrolla investigación en el área del diseño textil, con proyectos vinculados a innovación
+                en sustentabilidad, nuevos biotextiles, producción de materiales biodegradables a partir de descartes
+                orgánicos, incorporación de tecnología portable en textiles e indumentaria, cartas de color para
+                restauración y elaboración de hilados a partir de fibras vegetales.
+              </p>
+            </div>
+
+            <div class="bio-box">
+              <h3>Docencia y transferencia</h3>
+              <p>
+                La práctica docente se vincula con materias proyectuales y tecnológicas del campo textil, tanto en la
+                Universidad Nacional de Lanús como en otros espacios académicos. La experiencia del equipo incluye
+                participación en proyectos de investigación sobre desarrollo de nuevos materiales, sustentabilidad en la
+                cadena de valor textil y transferencia al medio productivo.
+              </p>
+            </div>
+
+            <div class="bio-box">
+              <h3>Diseño industrial, textil e indumentaria</h3>
+              <p>
+                El equipo cuenta también con experiencia en diseño industrial, textil e indumentaria, prácticas
+                pre-profesionales, planificación de producción y coordinación de proyectos. Estas trayectorias aportan
+                herramientas para optimizar procesos productivos y mejorar la eficiencia y calidad de la producción.
+              </p>
+            </div>
+          </section>
+
+        </div>
+
+        <div class="article-actions">
+          <button class="article-button" type="button" onclick="window.print()">
+            Imprimir / Guardar PDF
+          </button>
+        </div>
+
+      </article>
+    </div>
+  </main>
+
+  <script>
+    document.querySelectorAll('a[href^="#"]').forEach(function (link) {
+      link.addEventListener("click", function (event) {
+        var target = document.querySelector(this.getAttribute("href"));
+        if (!target) return;
+
+        event.preventDefault();
+        target.scrollIntoView({
+          behavior: "smooth",
+          block: "start"
+        });
+      });
+    });
+  </script>
+</body>
+</html>
