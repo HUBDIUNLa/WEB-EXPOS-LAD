@@ -234,13 +234,13 @@ h6 {
 .legal-card {
   max-width: 1000px;
   margin: 0 auto;
-  background: var(--hub-lad-cyan-dark);
-  color: var(--hub-white);
+  background: var(--web-lad);
+  color: var(--hub-onyx);
   padding: 3rem;
 }
 
 .legal-divider {
-  border-top: 4px solid var(--hub-dark-gray);
+  border-top: 4px solid var(--hub-dark-teal);
   margin-top: 2rem;
   margin-bottom: 2rem;
 }
