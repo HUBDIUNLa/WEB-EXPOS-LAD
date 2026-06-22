@@ -1,0 +1,541 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Certificados | Florecen pañuelos, florecen voces</title>
+  <meta name="description" content="Repositorio de certificados para expositores de la muestra Florecen pañuelos, florecen voces." />
+  <link href="https://fonts.googleapis.com/css2?family=Karla:wght@300;400;500;600;700;800&family=Roboto+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --ink: #080d08;
+      --paper: #f2f2f0;
+      --white: #ffffff;
+      --cyan: #aef8f5;
+      --cyan-strong: #00e7e1;
+      --web-lad: #A6FFF0; 
+      --muted: #59615d;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: "Karla", Arial, sans-serif;
+    }
+
+    main {
+      min-height: 100vh;
+      border: 12px solid var(--ink);
+    }
+
+    .container {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .hero {
+      padding: 48px 0 28px;
+      background: var(--cyan);
+      border-bottom: 12px solid var(--ink);
+    }
+
+    .hero-kicker,
+    .preview-label {
+      margin: 0 0 12px;
+      font-family: "Roboto Mono", monospace;
+      font-size: 14px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0;
+    }
+
+    h1 {
+      max-width: 900px;
+      margin: 0;
+      font-family: "Roboto Mono", monospace;
+      font-size: clamp(18px, 3vw, 40px);
+      line-height: 1.02;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+
+    .hero p {
+      max-width: 740px;
+      margin: 22px 0 0;
+      font-size: 19px;
+      line-height: 1.45;
+      font-weight: 500;
+    }
+
+    .preview-section {
+      padding: 38px 0 16px;
+    }
+
+    .certificate-shell {
+      width: 100%;
+      overflow: auto;
+      padding-bottom: 14px;
+    }
+
+    .certificate {
+      position: relative;
+      width: min(100%, 1120px);
+      aspect-ratio: 1.414 / 1;
+      margin: 0 auto;
+      background: var(--white);
+      border: 10px solid var(--ink);
+      color: var(--ink);
+      overflow: hidden;
+    }
+
+    .certificate-field {
+      position: absolute;
+      inset: 62px 52px 182px 52px;
+      background: linear-gradient(90deg, var(--cyan-strong), #35f3ee 52%, var(--cyan));
+    }
+
+    .certificate-brand {
+      position: absolute;
+      z-index: 2;
+      top: 28px;
+      left: 28px;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .certificate-logo {
+      width: 72px;
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--ink);
+      overflow: hidden;
+    }
+
+    .certificate-logo img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .logo-fallback {
+      display: none;
+      color: var(--white);
+      font-family: "Roboto Mono", monospace;
+      font-size: 18px;
+      font-weight: 700;
+      line-height: .9;
+      text-align: center;
+    }
+
+    .certificate-logo-lad {
+      padding: 6px;
+    }
+
+    .certificate-title {
+      position: absolute;
+      left: 74px;
+      right: 74px;
+      top: 238px;
+      font-family: "Roboto Mono", monospace;
+      font-size: clamp(20px, 4vw, 40px);
+      line-height: 1;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .certificate-copy {
+      position: absolute;
+      left: 78px;
+      right: 78px;
+      top: 374px;
+      max-width: 900px;
+      font-size: clamp(12px, 1.5vw, 19px);
+      line-height: 1.35;
+      font-weight: 600;
+    }
+
+    .certificate-name {
+      display: block;
+      margin: 14px 0;
+      font-family: "Roboto Mono", monospace;
+      font-size: clamp(18px, 3vw, 30px);
+      line-height: 1.05;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .certificate-signatures {
+      position: absolute;
+      left: 52px;
+      right: 52px;
+      bottom: 30px;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 28px;
+      padding-top: 22px;
+    
+      background: var(--white);
+      font-family: "Roboto Mono", monospace;
+      font-size: 11px;
+      line-height: 1.25;
+      text-transform: uppercase;
+    }
+
+   
+
+    .signature-line {
+      min-height: 72px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      gap: 8px;
+    }
+
+    .signature-line::before {
+      content: "";
+      display: block;
+      width: 100%;
+      border-top: 2px solid var(--ink);
+    }
+
+    .signature-line strong {
+      display: block;
+      font-weight: 700;
+    }
+
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+      margin: 24px 0 0;
+    }
+
+    .download-button,
+    .course-access-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 46px;
+      border: 2px solid var(--ink);
+      background: var(--ink);
+      color: var(--white);
+      padding: 12px 18px;
+      font-family: "Roboto Mono", monospace;
+      font-size: 14px;
+      font-weight: 700;
+      text-decoration: none;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background .18s ease, color .18s ease, transform .18s ease;
+    }
+
+    .download-button:hover,
+    .course-access-link:hover,
+    .course-access-link.is-active {
+      background: var(--web-lad);
+      color: var(--ink);
+      transform: translateY(-1px);
+    }
+
+    .grid-section {
+      padding: 28px 0 60px;
+    }
+
+    .resources-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 14px;
+    }
+
+    .resource-card {
+      display: flex;
+    }
+
+    .resource-card .course-access-link {
+      width: 100%;
+      min-height: 58px;
+      border: 2px solid var(--ink);
+      text-align: center;
+    }
+
+    @media (max-width: 760px) {
+      main {
+        border-width: 8px;
+      }
+
+      .hero {
+        padding-top: 34px;
+        border-bottom-width: 8px;
+      }
+
+      .certificate {
+        min-width: 760px;
+        border-width: 8px;
+      }
+
+      .resources-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <section class="hero">
+      <div class="container">
+        <p class="hero-kicker">Repositorio de certificados</p>
+        <br>
+        <h1>Florecen pañuelos, florecen voces</h1>
+        <p>Certificados para expositores de la muestra.</p> 
+        <p>Seleccioná un nombre para previsualizar el certificado y descargarlo en PDF.</p>
+      </div>
+    </section>
+
+    <section class="preview-section" aria-label="Previsualizacion del certificado">
+      <div class="container">
+        <p class="preview-label">Previsualizacion</p>
+        <div class="certificate-shell">
+          <article class="certificate" id="certificate">
+            <div class="certificate-field"></div>
+            <div class="certificate-brand" aria-label="Marcas institucionales">
+              <div class="certificate-logo">
+                <img src="assets/images/Logo UNLA Blanco.png" alt="Universidad Nacional de Lanús" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                <span class="logo-fallback">UN<br>La</span>
+              </div>
+              <div class="certificate-logo certificate-logo-lad">
+                <img src="assets/images/lad sin borde negro.png" alt="Laboratorio de Diseño" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                <span class="logo-fallback">L A<br>D</span>
+              </div>
+            </div>
+            <h2 class="certificate-title">Certificado<br>de expositor</h2>
+            <p class="certificate-copy">
+              <br>
+              Se certifica que
+              <span class="certificate-name" id="certificateName">Mariana Gómez Seminara</span>
+              participó como expositor/a en la muestra <strong>Florecen pañuelos, florecen voces</strong>, desarrollada en el marco de la Asignatura Taller de Diseño III de la Tecnicatura en Diseño Industrial y el LAD, Laboratorio de Diseño UNLa.
+            </p>
+            <div class="certificate-signatures" aria-label="Firmas institucionales">
+              <div class="signature-line">
+                <strong>Dirección Lic. en Diseño Industrial</strong>
+                <span>Esp DI Diego Velazco</span>
+              </div>
+              <div class="signature-line">
+                <strong>Coordinación General del LAD</strong>
+                <span>Esp Estefanía Fondevila Sancet</span>
+              </div>
+              <div class="signature-line">
+                <strong>Dirección Departamento de Humanidades y Artes</strong>
+                <span>Dr Aritz Recalde</span>
+              </div>
+            </div>
+          </article>
+        </div>
+        <div class="controls">
+  <button class="download-button" type="button" id="downloadSelectedCertificate">
+    Descargar certificado
+  </button>
+</div>
+      </div>
+    </section>
+
+    <section class="grid-section" aria-label="Listado de expositores">
+      <div class="container">
+        <div class="resources-grid" id="certificateGrid"></div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+  const exhibitors = [
+    "Mariana Gómez Seminara",
+    "Chiara Bloise",
+    "Joana Manno Villordo",
+    "Ana Ramirez Varlas",
+    "Tiara Calvo",
+    "Sofía Miño",
+    "Natalia Tanquia",
+    "Catalina Soler",
+    "Delfina García",
+    "Andy Oporto",
+    "Lara Domínguez Violi",
+    "Christian Campos",
+    "Valentina Pampuri",
+    "Constanza Gutiérrez",
+    "Eros Panucz",
+    "Sofía Negro",
+    "Florencia Strutzenberger",
+    "Carla Castro",
+    "Milagros Cerdán",
+    "Magali Pardini",
+    "Joaquín Kozlowski"
+  ];
+
+  const grid = document.getElementById("certificateGrid");
+  const certificateName = document.getElementById("certificateName");
+  const certificate = document.getElementById("certificate");
+  let selectedName = exhibitors[0];
+
+  function slugify(value) {
+    return value.toLowerCase()
+      .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-|-$/g, "");
+  }
+
+  function selectExhibitor(name) {
+    selectedName = name;
+    certificateName.textContent = name;
+
+    document.querySelectorAll(".course-access-link").forEach((button) => {
+      button.classList.toggle("is-active", button.dataset.name === name);
+    });
+  }
+
+  exhibitors.forEach((name) => {
+    const card = document.createElement("article");
+    card.className = "resource-card";
+    card.innerHTML = `
+      <button class="course-access-link" type="button" data-name="${name}" aria-label="Descargar certificado de ${name}">${name}</button>
+    `;
+
+    const button = card.querySelector(".course-access-link");
+
+    button.addEventListener("click", () => {
+      downloadCertificateFor(name);
+    });
+
+    grid.appendChild(card);
+  });
+
+  function pdfText(value) {
+    return value.normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .replace(/[()\\]/g, "\\$&");
+  }
+
+  function makeCertificatePdf(name) {
+  const title = "CERTIFICADO\nDE EXPOSITOR";
+  const lines = [
+    "Se certifica que",
+    name.toUpperCase(),
+    "participo como expositor/a en la muestra",
+    "Florecen panuelos, florecen voces,",
+    "desarrollada en el marco de la Asignatura Taller de Diseno III",
+    "de la Tecnicatura en Diseno Industrial y el LAD,",
+    "Laboratorio de Diseno UNLa."
+  ];
+
+  const stream = [
+    "q",
+    "0.031 0.051 0.031 rg 0 0 841.89 595.28 re f",
+    "1 1 1 rg 28 28 785.89 539.28 re f",
+    "0 0.91 0.88 rg 90 162 660 338 re f",
+    "0.031 0.051 0.031 rg 76 496 46 46 re f",
+    "1 1 1 rg BT /F1 14 Tf 85 524 Td (UN) Tj 0 -14 Td (La) Tj ET",
+    "0.031 0.051 0.031 rg 132 496 46 46 re f",
+    "1 1 1 rg BT /F1 10 Tf 144 523 Td (L A) Tj 7 -16 Td (D) Tj ET",
+    "0.031 0.051 0.031 rg BT /F1 42 Tf 106 330 Td"
+  ];
+
+  title.split("\n").forEach((line, index) => {
+    stream.push(`${index === 0 ? "" : "0 -50 Td"} (${line}) Tj`);
+  });
+
+  stream.push("ET");
+  stream.push("BT /F2 15 Tf 108 258 Td (" + pdfText(lines[0]) + ") Tj ET");
+  stream.push("BT /F1 38 Tf 108 214 Td (" + pdfText(lines[1]) + ") Tj ET");
+  stream.push("BT /F2 16 Tf 108 176 Td (" + pdfText(lines[2]) + ") Tj ET");
+  stream.push("BT /F1 16 Tf 108 154 Td (" + pdfText(lines[3]) + ") Tj ET");
+  stream.push("BT /F2 16 Tf 108 132 Td (" + pdfText(lines[4]) + ") Tj ET");
+  stream.push("BT /F2 16 Tf 108 110 Td (" + pdfText(lines[5]) + ") Tj ET");
+  stream.push("BT /F2 16 Tf 108 88 Td (" + pdfText(lines[6]) + ") Tj ET");
+  stream.push("0.031 0.051 0.031 RG 112 72 m 292 72 l S");
+  stream.push("0.031 0.051 0.031 RG 330 72 m 510 72 l S");
+  stream.push("0.031 0.051 0.031 RG 548 72 m 728 72 l S");
+  stream.push("0.031 0.051 0.031 rg BT /F1 9 Tf 112 52 Td (DIRECCION LIC. EN DISENO INDUSTRIAL) Tj ET");
+  stream.push("BT /F2 10 Tf 112 36 Td (Esp DI Diego Velazco) Tj ET");
+  stream.push("BT /F1 10 Tf 330 52 Td (COORDINACION GENERAL DEL LAD) Tj ET");
+  stream.push("BT /F2 10 Tf 330 36 Td (Esp Estefania Fondevila Sancet) Tj ET");
+  stream.push("BT /F1 8 Tf 548 52 Td (DIRECCION DPTO. HUMANIDADES Y ARTES) Tj ET");
+  stream.push("BT /F2 10 Tf 548 36 Td (Dr Aritz Recalde) Tj ET");
+  stream.push("Q");
+
+  const body = stream.join("\n");
+
+  const objects = [
+    "<< /Type /Catalog /Pages 2 0 R >>",
+    "<< /Type /Pages /Kids [3 0 R] /Count 1 >>",
+    "<< /Type /Page /Parent 2 0 R /MediaBox [0 0 841.89 595.28] /Resources << /Font << /F1 4 0 R /F2 5 0 R >> >> /Contents 6 0 R >>",
+    "<< /Type /Font /Subtype /Type1 /BaseFont /Courier-Bold >>",
+    "<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>",
+    `<< /Length ${body.length} >>\nstream\n${body}\nendstream`
+  ];
+
+  let pdf = "%PDF-1.4\n";
+  const offsets = [0];
+
+  objects.forEach((object, index) => {
+    offsets.push(pdf.length);
+    pdf += `${index + 1} 0 obj\n${object}\nendobj\n`;
+  });
+
+  const xref = pdf.length;
+  pdf += `xref\n0 ${objects.length + 1}\n0000000000 65535 f \n`;
+
+  offsets.slice(1).forEach((offset) => {
+    pdf += `${String(offset).padStart(10, "0")} 00000 n \n`;
+  });
+
+  pdf += `trailer << /Size ${objects.length + 1} /Root 1 0 R >>\nstartxref\n${xref}\n%%EOF`;
+
+  return new Blob([pdf], { type: "application/pdf" });
+}
+
+
+  function downloadCertificateFor(name) {
+    selectExhibitor(name);
+
+    const blob = makeCertificatePdf(selectedName);
+    const objectUrl = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+
+    link.href = objectUrl;
+    link.download = `certificado-${slugify(selectedName)}.pdf`;
+
+    document.body.appendChild(link);
+    link.click();
+
+    setTimeout(() => {
+      link.remove();
+      URL.revokeObjectURL(objectUrl);
+    }, 4000);
+  }
+
+  const selectedDownloadButton = document.getElementById("downloadSelectedCertificate");
+
+  if (selectedDownloadButton) {
+    selectedDownloadButton.addEventListener("click", () => {
+      downloadCertificateFor(selectedName);
+    });
+  }
+
+  selectExhibitor(selectedName);
+</script>
+
+  
+</body>
+</html>
+
+
+ 
