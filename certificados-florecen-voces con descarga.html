@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -157,7 +158,7 @@
       right: 74px;
       top: 238px;
       font-family: "Roboto Mono", monospace;
-      font-size: clamp(20px, 4vw, 40px);
+      font-size: clamp(18px, 3vw, 30px);
       line-height: 1;
       font-weight: 700;
       text-transform: uppercase;
@@ -169,7 +170,7 @@
       right: 78px;
       top: 374px;
       max-width: 900px;
-      font-size: clamp(12px, 1.5vw, 19px);
+      font-size: clamp(10px, 1vw, 15px);
       line-height: 1.35;
       font-weight: 600;
     }
@@ -178,12 +179,18 @@
       display: block;
       margin: 14px 0;
       font-family: "Roboto Mono", monospace;
-      font-size: clamp(18px, 3vw, 30px);
+      font-size: clamp(15px, 2vw, 20px);
       line-height: 1.05;
       font-weight: 700;
       text-transform: uppercase;
     }
 
+    .certificate-signatures{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:30px;
+  align-items:end;
+}
     .certificate-signatures {
       position: absolute;
       left: 52px;
@@ -201,7 +208,24 @@
       text-transform: uppercase;
     }
 
-   
+    .signature-block{
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end;
+}
+
+.firma{
+  width:200px;
+  height:100px;
+  object-fit:contain;
+  margin-bottom:-5px; /* acerca la firma a la línea */
+}
+
+
+.signature-line{
+  width:100%;
+  text-align:left;
+}
 
     .signature-line {
       min-height: 72px;
@@ -342,6 +366,7 @@
       .certificate-shell {
         overflow: visible !important;
       }
+  
     }
   </style>
 </head>
@@ -380,20 +405,36 @@
               <span class="certificate-name" id="certificateName">Mariana Gómez Seminara</span>
               participó como expositor/a en la muestra <strong>Florecen pañuelos, florecen voces</strong>, desarrollada en el marco de la Asignatura Taller de Diseño III de la Tecnicatura en Diseño Industrial y el LAD, Laboratorio de Diseño UNLa.
             </p>
-            <div class="certificate-signatures" aria-label="Firmas institucionales">
-              <div class="signature-line">
-                <strong>Dirección Lic. en Diseño Industrial</strong>
-                <span>Esp DI Diego Velazco</span>
-              </div>
-              <div class="signature-line">
-                <strong>Coordinación General del LAD</strong>
-                <span>Esp Estefanía Fondevila Sancet</span>
-              </div>
-              <div class="signature-line">
-                <strong>Dirección Departamento de Humanidades y Artes</strong>
-                <span>Dr Aritz Recalde</span>
-              </div>
-            </div>
+
+            <div class="certificate-signatures">
+
+  <div class="signature-block">
+    <img class="firma" src="assets/images/firma Velazco.png" alt="">
+    <div class="signature-line">
+      <strong>Dirección Lic. en Diseño Industrial</strong>
+      <span>Esp DI Diego Velazco</span>
+    </div>
+  </div>
+
+  <div class="signature-block">
+    <img class="firma" src="assets/images/firma estefi.png" alt="">
+    <div class="signature-line">
+      <strong>Coordinación General del LAD</strong>
+      <span>Esp Estefanía Fondevila Sancet</span>
+    </div>
+  </div>
+
+  <div class="signature-block">
+    <img class="firma" src="assets/images/firma dorado.png" alt="">
+    <div class="signature-line">
+      <strong>Docente Taller de Diseño III</strong>
+      <span>DT Cecilia Dorado</span>
+    </div>
+  </div>
+
+</div>
+
+ 
           </article>
         </div>
         <div class="controls">

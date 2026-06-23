@@ -803,3 +803,9 @@ h6 {
   }
 }
 
+.firma{
+    width: 80px;      /* ajustá el tamaño */
+    height: auto;
+    display: block;
+    margin: 0 auto 10px;
+}
