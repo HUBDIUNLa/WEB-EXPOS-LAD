@@ -1,20 +1,20 @@
+
 async function loadComponent(id, file) {
   const container = document.getElementById(id);
 
-  if (!container) {
-    console.error(`No existe el contenedor #${id}`);
-    return;
-  }
+  // No todas las páginas incluyen todos los componentes.
+  if (!container) return;
 
   try {
     const response = await fetch(file);
 
     if (!response.ok) {
-      throw new Error(`No se pudo cargar ${file}: ${response.status}`);
+      throw new Error(
+        `No se pudo cargar ${file}: ${response.status}`
+      );
     }
 
-    const html = await response.text();
-    container.innerHTML = html;
+    container.innerHTML = await response.text();
   } catch (error) {
     console.error(error);
   }
@@ -49,15 +49,53 @@ function initNavbar() {
   });
 }
 
-loadComponent("navbar", "components/navbar.html").then(initNavbar);
-loadComponent("footer", "components/footer.html");
+function initArticleHeader() {
+  const container = document.getElementById("article-header");
 
+  if (!container) return;
+
+  const backButton = container.querySelector(
+    ".article-header-back"
+  );
+
+  if (!backButton) return;
+
+  backButton.addEventListener("click", () => {
+    if (document.referrer && window.history.length > 1) {
+      window.history.back();
+    } else {
+      window.location.href = "index.html";
+    }
+  });
+}
+
+/* Carga del menú principal */
+loadComponent(
+  "navbar",
+  "components/navbar.html"
+).then(initNavbar);
+
+/* Carga del pie de página */
+loadComponent(
+  "footer",
+  "components/footer.html"
+);
+
+/* Carga del encabezado de los artículos */
+loadComponent(
+  "article-header",
+  "components/article-header.html?v=4"
+).then(initArticleHeader);
+
+/* Formulario de suscripción */
 document.addEventListener("submit", (event) => {
   if (event.target.id !== "formComunidad") return;
 
   event.preventDefault();
 
-  const message = document.getElementById("mensajeSuscripcion");
+  const message = document.getElementById(
+    "mensajeSuscripcion"
+  );
 
   if (message) {
     message.classList.remove("hidden");

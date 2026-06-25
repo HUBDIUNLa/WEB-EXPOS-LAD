@@ -809,3 +809,79 @@ h6 {
     display: block;
     margin: 0 auto 10px;
 }
+
+
+
+.unla-page-brand {
+  width: 100% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 20px;
+  padding: 14px 18px !important;
+  margin: 0 !important;
+  background: #000000 !important;
+}
+
+.unla-brand-link {
+  display: inline-flex !important;
+  align-items: center !important;
+  flex-shrink: 0;
+  text-decoration: none !important;
+}
+
+.unla-brand-link img {
+  display: block !important;
+  width: 70px !important;
+  height: auto !important;
+  object-fit: contain !important;
+}
+
+.header-back-button {
+  display: inline-flex !important;
+  min-height: 42px;
+  margin-left: auto !important;
+  padding: 9px 16px;
+  border: 2px solid #a6fff0;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  color: #ffffff;
+  background: #000000;
+
+  font-family: "Roboto Mono", monospace;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+
+  cursor: pointer;
+  transition:
+    color 150ms ease,
+    background-color 150ms ease;
+}
+
+.header-back-button:hover,
+.header-back-button:focus-visible {
+  color: #000000;
+  background: #a6fff0;
+}
+
+@media (max-width: 480px) {
+  .unla-page-brand {
+    padding: 12px 14px !important;
+  }
+
+  .header-back-button {
+    min-height: 38px;
+    padding: 8px 12px;
+    font-size: 0.7rem;
+  }
+}
+
+@media print {
+  .header-back-button {
+    display: none !important;
+  }
+}

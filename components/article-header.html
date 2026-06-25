@@ -1,0 +1,126 @@
+
+<style>
+  #article-header {
+    display: block;
+    width: 100%;
+  }
+
+  #article-header .article-header-bar {
+    display: flex !important;
+    width: 100% !important;
+    min-height: 98px;
+    margin: 0 !important;
+    padding: 12px 24px !important;
+    box-sizing: border-box !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 20px;
+    background: #000000 !important;
+  }
+
+  #article-header .article-header-home {
+    display: inline-flex !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    align-items: center;
+    flex: 0 0 auto;
+    text-decoration: none;
+  }
+
+  #article-header .article-header-logo {
+    display: block !important;
+    width: 70px !important;
+    max-width: 70px !important;
+    height: auto !important;
+    margin: 0 !important;
+    object-fit: contain;
+  }
+
+  #article-header .article-header-back {
+    display: inline-flex !important;
+    min-height: 42px;
+    margin: 0 0 0 auto !important;
+    padding: 9px 16px;
+    border: 2px solid #000000;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    flex: 0 0 auto;
+
+    color: #ffffff;
+    background: #000000;
+
+    font-family: "Roboto Mono", monospace;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    line-height: 1;
+    text-transform: uppercase;
+
+    cursor: pointer;
+    transition:
+      color 150ms ease,
+      background-color 150ms ease;
+  }
+
+  #article-header .article-header-back:hover,
+  #article-header .article-header-back:focus-visible {
+    color: #000000;
+    background: #a6fff0;
+    outline: none;
+  }
+
+  @media (max-width: 480px) {
+    #article-header .article-header-bar {
+      min-height: 82px;
+      padding: 10px 14px !important;
+    }
+
+    #article-header .article-header-logo {
+      width: 58px !important;
+      max-width: 58px !important;
+    }
+
+    #article-header .article-header-back {
+      min-height: 38px;
+      padding: 8px 12px;
+      font-size: 0.7rem;
+    }
+  }
+
+  @media print {
+    #article-header .article-header-back {
+      display: none !important;
+    }
+  }
+</style>
+
+<header
+  class="article-header-bar"
+  aria-label="Universidad Nacional de Lanús"
+>
+  <a
+    class="article-header-home"
+    href="index.html"
+    aria-label="Ir al inicio"
+  >
+    <img
+      class="article-header-logo"
+      src="assets/images/Logo UNLA Blanco.png"
+      alt="Universidad Nacional de Lanús"
+    >
+  </a>
+
+  <button
+    class="article-header-back"
+    type="button"
+    aria-label="Volver a la página anterior"
+  >
+    <i
+      class="fa-solid fa-arrow-left"
+      aria-hidden="true"
+    ></i>
+
+    <span>Volver</span>
+  </button>
+</header>
