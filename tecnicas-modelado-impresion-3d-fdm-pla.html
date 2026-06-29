@@ -1,0 +1,991 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Modelado 3D e Impresión 3D FDM en PLA</title>
+  <meta name="description" content="Técnicas, tecnologías y procesos de producción: modelado 3D e impresión 3D FDM en PLA." />
+
+<link rel="icon" href="assets/images/logohubfavicom.ico" type="image/x-icon" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Karla:wght@300;400;500;600;700&family=Roboto+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <style>
+ 
+   :root {
+      --detalle: #4f7f78;
+      --detalle-2: #A6FFF0;
+      --onyx: #2d3433;
+      --card-bg: #f4faf8;
+      --card-bg-2: #ffffff;
+      --muted: #63706d;
+      --line: rgba(79, 127, 120, 0.28);
+      --soft-line: rgba(79, 127, 120, 0.14);
+      --shadow: rgba(35, 52, 49, 0.16);
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+      body {
+  margin: 0;
+  background: linear-gradient(
+    180deg,
+    #eef8f5 0%,
+    #ffffff 45%,
+    #fbf7ef 100%
+  );
+  color: var(--onyx);
+  font-family: "Karla", sans-serif;
+  line-height: 1.68;
+}
+
+/* Navegación */
+nav,
+.site-nav,
+.menu,
+.navbar {
+  font-family: "Roboto Mono", monospace;
+}
+
+/* Botones */
+button,
+.btn,
+a.button {
+  font-family: "Roboto Mono", monospace;
+}
+
+/* Títulos */
+h1,
+h2,
+h3,
+.section-title {
+  font-family: "Roboto Mono", monospace;
+  letter-spacing: 0.05em;
+}
+
+/* Texto general */
+p,
+li,
+span,
+label,
+input,
+textarea {
+  font-family: "Karla", sans-serif;
+}
+
+h1,
+h2,
+h3,
+.section-title {
+  font-family: "Roboto Mono", monospace;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+    .article-page {
+      width: 100%;
+      padding: 48px 18px;
+    }
+
+    .article-container {
+      max-width: 980px;
+      margin: 0 auto;
+    }
+
+    .article-card {
+      position: relative;
+      overflow: hidden;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.94), rgba(244,250,248,0.98)),
+        var(--card-bg);
+      border: 1px solid var(--line);
+      box-shadow: 0 22px 60px var(--shadow);
+      padding: clamp(28px, 5vw, 64px);
+    }
+
+    .article-card::before {
+      content: "";
+      position: absolute;
+      inset: 0 0 auto 0;
+      height: 9px;
+      background: linear-gradient(90deg, var(--detalle), var(--detalle-2));
+    }
+
+    .article-kicker {
+      margin: 0 0 18px;
+      color: var(--detalle);
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .article-title {
+      max-width: 860px;
+      margin: 0;
+      color: var(--onyx);
+      font-size: clamp(1.35rem, 3vw, 2.7rem);
+      line-height: 1;
+      font-weight: 800;
+      letter-spacing: 0;
+    }
+
+    .article-author {
+      margin: 22px 0 0;
+      color: var(--detalle);
+      font-size: clamp(1rem, 2vw, 1.24rem);
+      font-weight: 700;
+    }
+
+    .article-meta {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin: 28px 0 0;
+    }
+
+    .meta-item {
+      padding: 14px 16px;
+      background: rgba(255,255,255,0.76);
+      border: 1px solid var(--soft-line);
+    }
+
+    .meta-label {
+      display: block;
+      color: var(--detalle);
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .meta-value {
+      display: block;
+      margin-top: 4px;
+      color: var(--onyx);
+      font-size: 0.96rem;
+      font-weight: 700;
+      line-height: 1.35;
+    }
+
+    .article-divider {
+      width: 100%;
+      height: 1px;
+      margin: 34px 0;
+      background: linear-gradient(90deg, var(--detalle), var(--line), transparent);
+    }
+
+    .article-intro {
+      margin: 0;
+      max-width: 820px;
+      color: var(--onyx);
+      font-size: clamp(1.05rem, 1.6vw, 1.22rem);
+      line-height: 1.75;
+    }
+
+    .article-index {
+      margin: 38px 0;
+      padding: 22px;
+      background: rgba(255,255,255,0.72);
+      border: 1px solid var(--soft-line);
+      border-left: 5px solid var(--detalle);
+    }
+
+    .article-index h2 {
+      margin: 0 0 14px;
+      color: var(--detalle);
+      font-size: 0.86rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .article-index ul {
+      display: grid;
+      gap: 8px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .article-index a {
+      color: var(--onyx);
+      font-size: 0.98rem;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .article-index a::before {
+      content: "-";
+      color: var(--detalle);
+      margin-right: 8px;
+    }
+
+    .article-index a:hover {
+      color: var(--detalle);
+      text-decoration: underline;
+      text-underline-offset: 4px;
+    }
+
+    .article-content {
+      display: grid;
+      gap: 34px;
+    }
+
+    .article-section {
+      scroll-margin-top: 28px;
+    }
+
+    .article-section h2 {
+      margin: 0 0 16px;
+      padding-bottom: 10px;
+      color: var(--detalle);
+      border-bottom: 1px solid var(--line);
+      font-size: clamp(1.22rem, 2vw, 1.6rem);
+      line-height: 1.2;
+      font-weight: 800;
+      letter-spacing: 0;
+    }
+
+    .article-section h3 {
+      margin: 24px 0 10px;
+      color: var(--onyx);
+      font-size: 1.05rem;
+      font-weight: 800;
+      letter-spacing: 0;
+    }
+
+    .article-section p {
+      margin: 0 0 18px;
+      color: var(--onyx);
+      font-size: 1.02rem;
+    }
+
+    .article-section p:last-child { margin-bottom: 0; }
+
+    .quote-box {
+      margin: 28px 0;
+      padding: 24px;
+      background: rgba(79, 127, 120, 0.07);
+      border-left: 5px solid var(--detalle);
+      color: var(--onyx);
+      font-size: 1.05rem;
+      font-style: italic;
+      line-height: 1.75;
+    }
+
+    .process-box {
+      margin-top: 18px;
+      padding: 24px;
+      background: var(--card-bg-2);
+      border: 1px solid var(--line);
+      border-top: 5px solid var(--detalle);
+    }
+
+    .process-box h3 {
+      margin-top: 0;
+      color: var(--detalle);
+    }
+
+    .process-list,
+    .feature-list {
+      display: grid;
+      gap: 10px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .process-list { counter-reset: process; }
+
+    .process-list li,
+    .feature-list li {
+      position: relative;
+      padding: 12px 14px 12px 42px;
+      background: rgba(255,255,255,0.74);
+      border: 1px solid var(--soft-line);
+      color: var(--onyx);
+      font-size: 0.98rem;
+      font-weight: 700;
+      line-height: 1.35;
+    }
+
+    .process-list li::before {
+      counter-increment: process;
+      content: counter(process);
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      display: grid;
+      width: 20px;
+      height: 20px;
+      place-items: center;
+      background: var(--detalle);
+      color: #ffffff;
+      font-size: 0.74rem;
+      font-weight: 800;
+      line-height: 1;
+    }
+
+    .feature-list li::before {
+      content: "";
+      position: absolute;
+      top: 18px;
+      left: 18px;
+      width: 8px;
+      height: 8px;
+      background: var(--detalle);
+    }
+
+    .article-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      margin-top: 34px;
+    }
+
+    .article-button {
+      appearance: none;
+      border: 1px solid var(--detalle);
+      background: var(--detalle);
+      color: #ffffff;
+      cursor: pointer;
+      padding: 12px 18px;
+      font: inherit;
+      font-size: 0.82rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: background 160ms ease, color 160ms ease, transform 160ms ease;
+    }
+
+    .article-button:hover {
+      background: transparent;
+      color: var(--detalle);
+      transform: translateY(-1px);
+    }
+
+    @media (max-width: 760px) {
+      .article-meta { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 640px) {
+      .article-page { padding: 22px 12px; }
+      .article-card { padding: 30px 20px; }
+      .article-index,
+      .process-box { padding: 18px; }
+      .article-actions { justify-content: stretch; }
+      .article-button { width: 100%; }
+    }
+
+    @media print {
+      body { background: #ffffff; }
+      .article-page { padding: 0; }
+      .article-card {
+        box-shadow: none;
+        border: none;
+      }
+      .article-actions { display: none; }
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+    }
+
+    header.unla-page-brand {
+  width: 100% !important;
+  height: auto !important;
+  min-height: 0 !important;
+  display: flex !important;
+  justify-content: flex-start !important;
+  align-items: center !important;
+  padding: 14px 18px !important;
+  margin: 0 !important;
+  background: #000000 !important;
+}
+
+header.unla-page-brand a.unla-brand-link {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: auto !important;
+  height: auto !important;
+  text-decoration: none !important;
+}
+
+header.unla-page-brand a.unla-brand-link img {
+  display: block !important;
+  width: 70px !important;
+  max-width: 70px !important;
+  height: auto !important;
+  max-height: none !important;
+  object-fit: contain !important;
+}
+
+    </style>
+
+</head>
+
+<body>
+
+  <div id="article-header"></div>
+
+  <main class="article-page">
+    <div class="article-container">
+      <article class="article-card">
+
+        <p class="article-kicker">Técnicas, tecnologías y procesos de producción</p>
+
+        <h1 class="article-title">Modelado e Impresión 3D FDM en PLA</h1>
+
+        <p class="article-author">Fabricación digital</p>
+
+        <div class="article-meta" aria-label="Datos del proceso">
+          <div class="meta-item">
+            <span class="meta-label">Área</span>
+            <span class="meta-value">Taller de Diseño Industrial IV</span>
+            <span class="meta-value">Orientacion Máquinas y Herramientas - Transportes</span>
+          </div>
+
+          <div class="meta-item">
+            <span class="meta-label">Tecnología</span>
+            <span class="meta-value">Impresión 3D FDM</span>
+          </div>
+
+          <div class="meta-item">
+            <span class="meta-label">Material</span>
+            <span class="meta-value">PLA (Ácido Poliláctico)</span>
+          </div>
+
+          <div class="meta-item">
+            <span class="meta-label">Proceso</span>
+            <span class="meta-value">Análisis, Proceso de Diseño, Modelado 3D, laminado, impresión y posprocesado</span>
+          </div>
+        </div>
+
+        <div class="article-divider"></div>
+
+        <p class="article-intro">
+          La fabricación digital ha transformado la manera en que diseñadores, ingenieros, arquitectos y artistas
+          conciben, desarrollan y producen objetos. La impresión 3D permite materializar modelos digitales mediante
+          procesos de fabricación aditiva, construyendo piezas capa por capa hasta obtener el objeto final.
+        </p>
+
+        <nav class="article-index" aria-label="Índice del artículo">
+          <h2>Índice</h2>
+          <ul>
+            <li><a href="#introduccion">Introducción y objetivos</a></li>
+            <li><a href="#fabricacion-modelado">Fabricación aditiva y modelado 3D</a></li>
+            <li><a href="#dfam">Diseño para manufactura aditiva</a></li>
+            <li><a href="#tecnologia-fdm">Tecnología y componentes FDM</a></li>
+            <li><a href="#flujo-archivos">Flujo de trabajo y archivos</a></li>
+            <li><a href="#parametros">Parámetros de impresión</a></li>
+            <li><a href="#pla">Material PLA y comparación</a></li>
+            <li><a href="#posprocesado-calidad">Posprocesado, calidad y errores</a></li>
+            <li><a href="#aplicaciones">Aplicaciones, ventajas y limitaciones</a></li>
+            <li><a href="#sustentabilidad">Sustentabilidad y conclusiones</a></li>
+          </ul>
+        </nav>
+
+        <div class="article-content">
+
+          <section id="introduccion" class="article-section">
+            <h2>Introducción</h2>
+
+            <p>El proceso de diseño: El diseño constituye un proceso proyectual orientado a resolver problemas mediante 
+              la planificación, el análisis y la toma de decisiones fundamentadas. 
+              Más allá de la generación de una forma, diseñar implica comprender una necesidad, 
+              interpretar un contexto y desarrollar una propuesta capaz de responder de manera funcional, 
+              técnica, estética y comunicacional a los requerimientos planteados.</p>
+
+<p>Desde una perspectiva metodológica, el proceso de diseño puede entenderse como una secuencia organizada de etapas 
+  interrelacionadas. En primer lugar se identifica el problema y se recopila información pertinente acerca del usuario, 
+  el contexto, los materiales disponibles y las tecnologías de fabricación. Posteriormente se analizan los condicionantes 
+  del proyecto y se establecen los criterios que orientarán el desarrollo de la propuesta.</p>
+
+<p>A partir de esta instancia comienza la generación de alternativas, donde el diseñador explora diferentes soluciones 
+  mediante bocetos, esquemas, maquetas y modelos digitales. Este proceso no es lineal, sino iterativo: cada propuesta es 
+  evaluada, modificada y perfeccionada en función de los resultados obtenidos. La experimentación y la verificación 
+  constituyen herramientas fundamentales para reducir la incertidumbre y mejorar progresivamente la calidad del diseño.</p>
+
+<p>En el contexto de la fabricación digital, el modelado tridimensional y la impresión 3D potencian esta metodología 
+  proyectual al permitir transformar rápidamente las ideas en prototipos físicos. La posibilidad de fabricar modelos 
+  de manera ágil favorece la evaluación de aspectos funcionales, ergonómicos, dimensionales y constructivos antes de 
+  la producción definitiva, disminuyendo tiempos de desarrollo y costos asociados a la fabricación tradicional.</p>
+
+<p>Siguiendo el pensamiento de Bruno Munari, el diseño no debe entenderse como un acto intuitivo o exclusivamente creativo, 
+  sino como un proceso racional en el que cada decisión responde a un problema específico. La creatividad adquiere valor 
+  cuando se encuentra respaldada por un método capaz de integrar conocimientos técnicos, materiales, productivos y culturales. 
+  En este sentido, la impresión 3D se incorpora como una herramienta más dentro del proceso proyectual, 
+  ampliando las posibilidades de experimentación y facilitando el vínculo entre la concepción de una idea y su materialización.</p>
+
+            <p>
+              A diferencia de los procesos tradicionales de manufactura, donde el material es retirado mediante corte,
+              mecanizado o fresado, la fabricación aditiva incorpora únicamente el material necesario para construir la
+              geometría diseñada. Esto reduce desperdicios, permite fabricar formas complejas y facilita la producción
+              de piezas personalizadas sin necesidad de moldes ni herramientas específicas.
+            </p>
+
+            <p>
+              Actualmente la impresión 3D se encuentra presente en múltiples disciplinas: diseño industrial,
+              arquitectura, medicina, odontología, ingeniería, educación, arte, patrimonio cultural, investigación y
+              producción de bienes de consumo. Su incorporación dentro del proceso proyectual ha modificado la forma en
+              que se desarrollan prototipos, se verifican diseños y se fabrican productos de baja escala.
+            </p>
+
+            <p>
+              Entre las distintas tecnologías existentes, el Modelado por Deposición Fundida (FDM) constituye el
+              sistema más difundido debido a su bajo costo, facilidad de utilización y amplia disponibilidad de
+              materiales. En este proceso se emplean filamentos termoplásticos que son fundidos y depositados de manera
+              controlada para construir el objeto capa por capa.
+            </p>
+
+            <div class="process-box">
+              <h3>Objetivos</h3>
+              <ul class="feature-list">
+                <li>Comprender los fundamentos de la fabricación aditiva.</li>
+                <li>Reconocer las diferencias entre procesos aditivos y sustractivos.</li>
+                <li>Comprender el flujo completo de producción desde el modelo digital hasta la pieza física.</li>
+                <li>Identificar los componentes principales de una impresora FDM.</li>
+                <li>Conocer las propiedades del PLA como material de impresión.</li>
+                <li>Aplicar criterios básicos de diseño para impresión 3D.</li>
+                <li>Reconocer ventajas, limitaciones y aplicaciones de esta tecnología.</li>
+              </ul>
+            </div>
+          </section>
+
+          <section id="fabricacion-modelado" class="article-section">
+            <h2>Fabricación aditiva y modelado 3D</h2>
+
+            <h3>Fabricación aditiva</h3>
+            <p>
+              La fabricación aditiva comprende un conjunto de procesos capaces de producir objetos tridimensionales
+              mediante la incorporación progresiva de material. El proceso comienza con un modelo digital desarrollado
+              mediante software CAD (Computer Aided Design). Dicho modelo es convertido posteriormente en un archivo
+              geométrico que será interpretado por un programa denominado laminador o slicer, encargado de dividir el
+              objeto en cientos o miles de capas horizontales.
+            </p>
+
+            <p>
+              Finalmente la impresora ejecuta las instrucciones generadas por el slicer depositando material fundido
+              hasta obtener la geometría proyectada. Este sistema permite fabricar piezas imposibles de producir
+              mediante procesos convencionales, incorporando cavidades internas, estructuras livianas, entramados y
+              geometrías orgánicas de elevada complejidad.
+            </p>
+
+            <h3>Modelado 3D</h3>
+            <p>
+              El modelado tridimensional constituye la primera etapa del proceso productivo. Consiste en construir
+              digitalmente el objeto mediante herramientas CAD que permiten definir dimensiones, superficies, sólidos,
+              ensamblajes y relaciones geométricas.
+            </p>
+
+            <div class="process-box">
+              <h3>Estrategias de modelado</h3>
+              <ul class="feature-list">
+                <li>Modelado paramétrico.</li>
+                <li>Modelado por superficies.</li>
+                <li>Modelado orgánico.</li>
+                <li>Esculpido digital.</li>
+                <li>Ingeniería inversa mediante escaneo 3D.</li>
+              </ul>
+            </div>
+
+            <p>
+              Entre los programas más utilizados se encuentran Fusion 360, SolidWorks, Rhino, Inventor, FreeCAD,
+              Blender y Onshape. Durante esta etapa resulta fundamental considerar las limitaciones propias del proceso
+              de impresión para evitar errores posteriores.
+            </p>
+          </section>
+
+          <section id="dfam" class="article-section">
+            <h2>Diseño para Manufactura Aditiva (DfAM)</h2>
+
+            <p>
+              Diseñar para impresión 3D implica adoptar criterios diferentes respecto a los procesos industriales
+              tradicionales. El concepto DfAM busca aprovechar las ventajas de la fabricación aditiva evitando diseñar
+              objetos que luego resulten difíciles o imposibles de fabricar.
+            </p>
+
+            <div class="process-box">
+              <h3>Criterios de diseño</h3>
+              <ul class="feature-list">
+                <li>Orientación de impresión.</li>
+                <li>Espesor mínimo de paredes.</li>
+                <li>Ángulos de voladizo.</li>
+                <li>Necesidad de soportes.</li>
+                <li>Tolerancias dimensionales.</li>
+                <li>Resistencia según dirección de las capas.</li>
+                <li>Posibilidad de ensamblajes.</li>
+                <li>Optimización del consumo de material.</li>
+              </ul>
+            </div>
+          </section>
+
+          <section id="tecnologia-fdm" class="article-section">
+            <h2>Tecnología FDM</h2>
+
+            <p>
+              FDM significa Fused Deposition Modeling. Su funcionamiento consiste en fundir un filamento termoplástico
+              mediante un extrusor calentado. El material sale por una boquilla cuyo diámetro habitual oscila entre 0,2
+              y 0,8 mm.
+            </p>
+
+            <p>
+              Mientras el cabezal se desplaza siguiendo trayectorias programadas, el plástico fundido se deposita
+              formando una capa. Al finalizar cada capa la plataforma desciende, o el cabezal asciende según el diseño
+              de la máquina, para continuar con la siguiente. La repetición de este proceso genera progresivamente la
+              pieza completa.
+            </p>
+
+            <div class="quote-box">
+              La pieza se construye mediante la deposición controlada de material termoplástico, capa por capa, a partir
+              de las trayectorias definidas digitalmente.
+            </div>
+
+            <div class="process-box">
+              <h3>Componentes principales</h3>
+              <ul class="feature-list">
+                <li>Bastidor estructural.</li>
+                <li>Motores paso a paso.</li>
+                <li>Sistema de movimiento lineal.</li>
+                <li>Extrusor.</li>
+                <li>Hotend.</li>
+                <li>Boquilla.</li>
+                <li>Ventiladores.</li>
+                <li>Cama calefaccionada.</li>
+                <li>Fuente de alimentación.</li>
+                <li>Placa electrónica.</li>
+                <li>Pantalla de control.</li>
+                <li>Sensores de temperatura.</li>
+              </ul>
+            </div>
+
+            <p>
+              Cada uno de estos componentes cumple funciones específicas que afectan directamente la calidad final de
+              impresión.
+            </p>
+          </section>
+
+          <section id="flujo-archivos" class="article-section">
+            <h2>Flujo de trabajo y archivos</h2>
+
+            <div class="process-box">
+              <h3>Proceso completo</h3>
+              <ol class="process-list">
+                <li>Diseño CAD.</li>
+                <li>Revisión del modelo.</li>
+                <li>Exportación STL o 3MF.</li>
+                <li>Importación al slicer.</li>
+                <li>Configuración de impresión.</li>
+                <li>Generación del G-Code.</li>
+                <li>Preparación de la impresora.</li>
+                <li>Calibración.</li>
+                <li>Impresión.</li>
+                <li>Enfriamiento.</li>
+                <li>Retiro de soportes.</li>
+                <li>Posprocesado.</li>
+                <li>Control dimensional.</li>
+                <li>Evaluación funcional.</li>
+              </ol>
+            </div>
+
+            <h3>El archivo STL</h3>
+            <p>
+              El formato STL representa la superficie del modelo mediante miles de pequeños triángulos. No almacena
+              información de materiales, colores o texturas. Es el formato más difundido para impresión 3D debido a su
+              compatibilidad con prácticamente todos los programas laminadores. Actualmente también adquieren
+              importancia formatos más modernos como 3MF, capaces de conservar mayor cantidad de información del
+              proyecto.
+            </p>
+
+            <h3>Laminado (Slicer)</h3>
+            <p>
+              El slicer convierte el modelo tridimensional en instrucciones que la impresora puede interpretar. El
+              resultado final es un archivo G-Code.
+            </p>
+
+            <div class="process-box">
+              <h3>Configuraciones del laminado</h3>
+              <ul class="feature-list">
+                <li>Altura de capa.</li>
+                <li>Temperatura.</li>
+                <li>Velocidad.</li>
+                <li>Tipo de relleno.</li>
+                <li>Cantidad de perímetros.</li>
+                <li>Soportes.</li>
+                <li>Adhesión.</li>
+                <li>Ventilación.</li>
+                <li>Tiempo estimado.</li>
+              </ul>
+            </div>
+          </section>
+
+          <section id="parametros" class="article-section">
+            <h2>Parámetros de impresión</h2>
+
+            <p>
+              La calidad final depende en gran medida de la correcta configuración de los parámetros.
+            </p>
+
+            <h3>Altura de capa</h3>
+            <p>
+              Determina la resolución vertical. Capas pequeñas producen mejor acabado pero incrementan
+              considerablemente el tiempo de fabricación.
+            </p>
+
+            <h3>Temperatura</h3>
+            <p>
+              Debe adaptarse al material utilizado. Para PLA suele encontrarse entre 190 y 220 °C.
+            </p>
+
+            <h3>Velocidad</h3>
+            <p>
+              Velocidades elevadas reducen el tiempo de impresión aunque pueden afectar la precisión.
+            </p>
+
+            <h3>Relleno (Infill)</h3>
+            <p>
+              Controla la densidad interna. Valores entre 15% y 30% resultan adecuados para la mayoría de los
+              prototipos.
+            </p>
+
+            <h3>Perímetros</h3>
+            <p>
+              Incrementar la cantidad de paredes mejora significativamente la resistencia mecánica.
+            </p>
+
+            <h3>Soportes</h3>
+            <p>
+              Permiten fabricar voladizos superiores a aproximadamente 45°. Posteriormente deben retirarse
+              manualmente.
+            </p>
+          </section>
+
+          <section id="pla" class="article-section">
+            <h2>Material PLA</h2>
+
+            <p>
+              El PLA (Ácido Poliláctico) constituye uno de los materiales más utilizados en impresión FDM. Se obtiene a
+              partir de recursos renovables como almidón de maíz, caña de azúcar o remolacha. Presenta excelente
+              estabilidad dimensional y escasa contracción durante el enfriamiento. Estas características facilitan
+              considerablemente la impresión respecto de otros termoplásticos.
+            </p>
+
+            <div class="process-box">
+              <h3>Propiedades del PLA</h3>
+              <ul class="feature-list">
+                <li>Fácil impresión.</li>
+                <li>Baja deformación.</li>
+                <li>Excelente terminación superficial.</li>
+                <li>Buena rigidez.</li>
+                <li>Baja emisión de olores.</li>
+                <li>Material biobasado.</li>
+                <li>Amplia disponibilidad comercial.</li>
+                <li>Gran variedad de colores.</li>
+                <li>Compatible con impresoras abiertas.</li>
+              </ul>
+            </div>
+
+            <div class="process-box">
+              <h3>Limitaciones del PLA</h3>
+              <ul class="feature-list">
+                <li>Baja resistencia al calor.</li>
+                <li>Fragilidad frente a impactos.</li>
+                <li>Menor resistencia química.</li>
+                <li>Deformación por encima de 55-60 °C.</li>
+                <li>Limitada flexibilidad.</li>
+              </ul>
+            </div>
+
+            <p>
+              Por estas razones no resulta adecuado para piezas sometidas a elevadas temperaturas o esfuerzos
+              mecánicos permanentes.
+            </p>
+
+            <h3>Comparación de materiales</h3>
+            <div class="process-box">
+              <ul class="feature-list">
+                <li><strong>PLA:</strong> ideal para prototipos, maquetas y piezas decorativas.</li>
+                <li><strong>ABS:</strong> mayor resistencia mecánica y térmica, aunque presenta elevada contracción durante la impresión.</li>
+                <li><strong>PETG:</strong> excelente equilibrio entre resistencia, flexibilidad y facilidad de impresión.</li>
+                <li><strong>TPU:</strong> material flexible utilizado para componentes elásticos y amortiguadores.</li>
+              </ul>
+            </div>
+          </section>
+
+          <section id="posprocesado-calidad" class="article-section">
+            <h2>Posprocesado, control de calidad y errores</h2>
+
+            <h3>Posprocesado</h3>
+            <p>
+              Una vez finalizada la impresión pueden realizarse distintas operaciones que mejoran el acabado
+              superficial y amplían las posibilidades estéticas del producto.
+            </p>
+
+            <div class="process-box">
+              <ul class="feature-list">
+                <li>Retiro de soportes.</li>
+                <li>Eliminación de rebabas.</li>
+                <li>Lijado.</li>
+                <li>Pintura.</li>
+                <li>Pegado.</li>
+                <li>Ensamblado.</li>
+                <li>Pulido.</li>
+                <li>Aplicación de imprimaciones.</li>
+              </ul>
+            </div>
+
+            <h3>Control de calidad</h3>
+            <p>Toda pieza debe ser evaluada considerando:</p>
+            <div class="process-box">
+              <ul class="feature-list">
+                <li>Precisión dimensional.</li>
+                <li>Calidad superficial.</li>
+                <li>Adhesión entre capas.</li>
+                <li>Ausencia de deformaciones.</li>
+                <li>Funcionamiento mecánico.</li>
+                <li>Resistencia.</li>
+                <li>Correspondencia con el modelo CAD.</li>
+              </ul>
+            </div>
+
+            <h3>Errores frecuentes</h3>
+            <div class="process-box">
+              <ul class="feature-list">
+                <li>Warping.</li>
+                <li>Stringing.</li>
+                <li>Layer Shifting.</li>
+                <li>Under Extrusion.</li>
+                <li>Over Extrusion.</li>
+                <li>Mala adhesión a la cama.</li>
+                <li>Obstrucción de la boquilla.</li>
+                <li>Delaminación.</li>
+              </ul>
+            </div>
+
+            <p>
+              Cada uno de estos problemas puede corregirse modificando parámetros, calibrando la máquina o mejorando
+              el diseño.
+            </p>
+          </section>
+
+          <section id="aplicaciones" class="article-section">
+            <h2>Aplicaciones, ventajas y limitaciones</h2>
+
+            <h3>Aplicaciones</h3>
+            <p>
+              La impresión 3D FDM posee aplicaciones en numerosos campos. En diseño industrial permite fabricar
+              prototipos funcionales, validar ergonomía, estudiar mecanismos y desarrollar productos personalizados.
+              En arquitectura facilita la construcción de maquetas. En medicina posibilita modelos anatómicos. En
+              educación favorece el aprendizaje mediante objetos físicos.
+            </p>
+
+            <p>
+              En patrimonio cultural permite reproducir piezas históricas con fines de conservación y difusión. En
+              ingeniería acelera el desarrollo de componentes y herramientas auxiliares.
+            </p>
+
+            <div class="process-box">
+              <h3>Ventajas</h3>
+              <ul class="feature-list">
+                <li>Fabricación rápida.</li>
+                <li>Bajo costo.</li>
+                <li>Personalización.</li>
+                <li>Producción bajo demanda.</li>
+                <li>Reducción de desperdicios.</li>
+                <li>Libertad formal.</li>
+                <li>Prototipado iterativo.</li>
+                <li>Digitalización del proceso productivo.</li>
+              </ul>
+            </div>
+
+            <div class="process-box">
+              <h3>Limitaciones</h3>
+              <ul class="feature-list">
+                <li>Producción lenta para grandes series.</li>
+                <li>Resistencia anisotrópica.</li>
+                <li>Acabado superficial visible por capas.</li>
+                <li>Limitaciones dimensionales.</li>
+                <li>Dependencia de la correcta calibración.</li>
+                <li>Restricciones térmicas del PLA.</li>
+              </ul>
+            </div>
+          </section>
+
+          <section id="sustentabilidad" class="article-section">
+            <h2>Sustentabilidad</h2>
+
+            <p>
+              La fabricación aditiva reduce significativamente el desperdicio de material respecto de procesos
+              sustractivos. El PLA, al provenir de recursos renovables, constituye una alternativa de menor impacto
+              ambiental frente a otros polímeros derivados exclusivamente del petróleo.
+            </p>
+
+            <p>
+              No obstante, la sustentabilidad del proceso depende también del consumo energético, la vida útil del
+              producto y las posibilidades de reutilización o reciclado del material. El diseño responsable debe
+              considerar la optimización geométrica, la reducción del consumo de filamento y la fabricación únicamente
+              de aquellas piezas necesarias.
+            </p>
+
+            <h3>Conclusiones</h3>
+            <p>
+              La impresión 3D mediante tecnología FDM representa una de las herramientas más importantes dentro de la
+              fabricación digital contemporánea. Su incorporación al proceso de diseño permite reducir tiempos de
+              desarrollo, validar propuestas, experimentar con nuevas geometrías y fabricar objetos personalizados de
+              manera eficiente.
+            </p>
+
+            <p>
+              El conocimiento del modelado tridimensional, la correcta configuración de los parámetros de impresión y
+              la comprensión de las propiedades del PLA constituyen competencias fundamentales para cualquier diseñador
+              que desee incorporar tecnologías de fabricación aditiva a su práctica profesional.
+            </p>
+
+            <div class="quote-box">
+              Más que un simple método de producción, la impresión 3D representa un cambio de paradigma en la forma de
+              proyectar, fabricar y comprender los objetos, promoviendo procesos más flexibles, colaborativos e
+              innovadores.
+            </div>
+          </section>
+
+        </div>
+
+        <div class="article-actions">
+          <button class="article-button" type="button" onclick="window.print()">
+            Imprimir / Guardar PDF
+          </button>
+        </div>
+
+      </article>
+    </div>
+  </main>
+
+  <script src="js/components.js?v=2"></script>
+
+  <script>
+    document.querySelectorAll('a[href^="#"]').forEach(function (link) {
+      link.addEventListener("click", function (event) {
+        var target = document.querySelector(this.getAttribute("href"));
+        if (!target) return;
+
+        event.preventDefault();
+        target.scrollIntoView({
+          behavior: "smooth",
+          block: "start"
+        });
+      });
+    });
+  </script>
+</body>
+</html>

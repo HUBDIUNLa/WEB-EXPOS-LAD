@@ -1,0 +1,687 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>La Herramienta del Diseñador - Delgado Lucas</title>
+  <meta name="description" content="Muestra portaminas de Taller 4. Propuesta de portaminas de Delgado Lucas." />
+
+<link rel="icon" href="assets/images/logohubfavicom.ico" type="image/x-icon" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Karla:wght@300;400;500;600;700&family=Roboto+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <style>
+   
+     :root {
+      --detalle: #4f7f78;
+      --detalle-2: #A6FFF0;
+      --onyx: #2d3433;
+      --card-bg: #ffffff;
+      --card-bg-2: #ffffff;
+      --muted: #63706d;
+      --line: rgba(79, 127, 120, 0.28);
+      --soft-line: rgba(79, 127, 120, 0.14);
+      --shadow: rgba(35, 52, 49, 0.16);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+       body {
+  margin: 0;
+  background: linear-gradient(
+    180deg,
+    #eef8f5 0%,
+    #ffffff 45%,
+    #ffffff 100%
+  );
+  color: var(--onyx);
+  font-family: "Karla", sans-serif;
+  line-height: 1.68;
+}
+
+/* Navegación */
+nav,
+.site-nav,
+.menu,
+.navbar {
+  font-family: "Roboto Mono", monospace;
+}
+
+/* Botones */
+button,
+.btn,
+a.button {
+  font-family: "Roboto Mono", monospace;
+}
+
+/* Títulos */
+h1,
+h2,
+h3,
+.section-title {
+  font-family: "Roboto Mono", monospace;
+  letter-spacing: 0.05em;
+}
+
+/* Texto general */
+p,
+li,
+span,
+label,
+input,
+textarea {
+  font-family: "Karla", sans-serif;
+}
+
+h1,
+h2,
+h3,
+.section-title {
+  font-family: "Roboto Mono", monospace;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+    .article-page {
+      width: 100%;
+      padding: 48px 18px;
+    }
+
+    .article-container {
+      max-width: 980px;
+      margin: 0 auto;
+    }
+
+    .article-card {
+      position: relative;
+      overflow: hidden;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.94), rgba(255, 255, 255, 0.94)),
+        var(--card-bg);
+      border: 1px solid var(--line);
+      box-shadow: 0 22px 60px var(--card-bg);
+      padding: clamp(28px, 5vw, 64px);
+    }
+
+    .article-card::before {
+      content: "";
+      position: absolute;
+      inset: 0 0 auto 0;
+      height: 9px;
+      background: linear-gradient(90deg, var(--detalle), var(--detalle-2));
+    }
+
+    .article-kicker {
+      margin: 0 0 18px;
+      color: var(--detalle);
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .article-title {
+      max-width: 860px;
+      margin: 0;
+      color: var(--onyx);
+      font-size: clamp(1.35rem, 3vw, 2.7rem);
+      line-height: 1;
+      font-weight: 800;
+      letter-spacing: 0;
+    }
+
+    .article-author {
+      margin: 22px 0 0;
+      color: var(--detalle);
+      font-size: clamp(1rem, 2vw, 1.24rem);
+      font-weight: 700;
+    }
+
+    .article-meta {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin: 28px 0 0;
+    }
+
+    .meta-item {
+      padding: 14px 16px;
+      background: rgba(255, 255, 255, 0.76);
+      border: 1px solid var(--soft-line);
+    }
+
+    .meta-label {
+      display: block;
+      color: var(--detalle);
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .meta-value {
+      display: block;
+      margin-top: 4px;
+      color: var(--onyx);
+      font-size: 0.96rem;
+      font-weight: 700;
+      line-height: 1.35;
+    }
+
+    .article-divider {
+      width: 100%;
+      height: 1px;
+      margin: 34px 0;
+      background: linear-gradient(90deg, var(--detalle), var(--line), transparent);
+    }
+
+    .article-intro {
+      margin: 0;
+      max-width: 800px;
+      color: var(--onyx);
+      font-size: clamp(1.05rem, 1.6vw, 1.22rem);
+      line-height: 1.75;
+    }
+
+    .article-index {
+      margin: 38px 0;
+      padding: 22px;
+      background: rgba(255, 255, 255, 0.72);
+      border: 1px solid var(--soft-line);
+      border-left: 5px solid var(--detalle);
+    }
+
+    .article-index h2 {
+      margin: 0 0 14px;
+      color: var(--detalle);
+      font-size: 0.86rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .article-index ul {
+      display: grid;
+      gap: 8px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .article-index a {
+      color: var(--onyx);
+      font-size: 0.98rem;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .article-index a::before {
+      content: "-";
+      color: var(--detalle);
+      margin-right: 8px;
+    }
+
+    .article-index a:hover {
+      color: var(--detalle);
+      text-decoration: underline;
+      text-underline-offset: 4px;
+    }
+
+    .article-content {
+      display: grid;
+      gap: 34px;
+    }
+
+    .article-section {
+      scroll-margin-top: 28px;
+    }
+
+    .article-section h2 {
+      margin: 0 0 16px;
+      padding-bottom: 10px;
+      color: var(--detalle);
+      border-bottom: 1px solid var(--line);
+      font-size: clamp(1.22rem, 2vw, 1.6rem);
+      line-height: 1.2;
+      font-weight: 800;
+      letter-spacing: 0;
+    }
+
+    .article-section p {
+      margin: 0 0 18px;
+      color: var(--onyx);
+      font-size: 1.02rem;
+    }
+
+    .article-section p:last-child {
+      margin-bottom: 0;
+    }
+
+    .quote-box {
+      margin: 28px 0;
+      padding: 24px;
+      background: rgba(210, 71, 84, 0.07);
+      border-left: 5px solid var(--detalle);
+      color: var(--onyx);
+      font-size: 1.05rem;
+      font-style: italic;
+      line-height: 1.75;
+    }
+
+    .gallery-box {
+      margin-top: 8px;
+      padding: 28px;
+      background: var(--card-bg-2);
+      border: 1px solid var(--line);
+      border-top: 5px solid var(--detalle);
+      scroll-margin-top: 28px;
+    }
+
+    .gallery-box h2 {
+      margin: 0 0 18px;
+      color: var(--detalle);
+      font-size: 1.1rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .gallery-item {
+      margin: 0;
+      background: #ffffff;
+      border: 1px solid var(--soft-line);
+    }
+
+    .gallery-item img {
+      display: block;
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      background: #ffffff;
+    }
+
+    .gallery-item:first-child img {
+      object-fit: contain;
+      padding: 10px;
+      background: #ffffff;
+    }
+
+    .gallery-item figcaption {
+      padding: 12px 14px;
+      color: var(--muted);
+      font-size: 0.9rem;
+      font-weight: 700;
+      line-height: 1.35;
+    }
+
+    .student-box {
+      display: grid;
+      grid-template-columns: 150px 1fr;
+      gap: 22px;
+      align-items: center;
+      margin-top: 20px;
+      padding: 22px;
+      background: rgba(255, 255, 255, 0.82);
+      border: 1px solid var(--soft-line);
+    }
+
+    .student-photo {
+      width: 150px;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      border: 4px solid var(--detalle);
+      background: #ffffff;
+      box-shadow: 0 10px 26px rgba(48, 35, 31, 0.16);
+    }
+
+    .student-box p {
+      margin: 0;
+      color: var(--onyx);
+      font-size: 1rem;
+    }
+
+    .article-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      margin-top: 34px;
+    }
+
+    .article-button {
+      appearance: none;
+      border: 1px solid var(--detalle);
+      background: var(--detalle);
+      color: #ffffff;
+      cursor: pointer;
+      padding: 12px 18px;
+      font: inherit;
+      font-size: 0.82rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: background 160ms ease, color 160ms ease, transform 160ms ease;
+    }
+
+    .article-button:hover {
+      background: transparent;
+      color: var(--detalle);
+      transform: translateY(-1px);
+    }
+
+    @media (max-width: 760px) {
+      .article-meta,
+      .gallery-grid,
+      .student-box {
+        grid-template-columns: 1fr;
+      }
+
+      .student-photo {
+        width: 140px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .article-page {
+        padding: 22px 12px;
+      }
+
+      .article-card {
+        padding: 30px 20px;
+      }
+
+      .article-index,
+      .gallery-box {
+        padding: 18px;
+      }
+
+      .student-box {
+        padding: 18px;
+      }
+
+      .article-actions {
+        justify-content: stretch;
+      }
+
+      .article-button {
+        width: 100%;
+      }
+    }
+
+    @media print {
+      body {
+        background: #ffffff;
+      }
+
+      .article-page {
+        padding: 0;
+      }
+
+      .article-card {
+        box-shadow: none;
+        border: none;
+      }
+
+      .article-actions {
+        display: none;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+    }
+
+    
+    header.unla-page-brand {
+  width: 100% !important;
+  height: auto !important;
+  min-height: 0 !important;
+  display: flex !important;
+  justify-content: flex-start !important;
+  align-items: center !important;
+  padding: 14px 18px !important;
+  margin: 0 !important;
+  background: #000000 !important;
+}
+
+header.unla-page-brand a.unla-brand-link {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: auto !important;
+  height: auto !important;
+  text-decoration: none !important;
+}
+
+header.unla-page-brand a.unla-brand-link img {
+  display: block !important;
+  width: 70px !important;
+  max-width: 70px !important;
+  height: auto !important;
+  max-height: none !important;
+  object-fit: contain !important;
+}
+
+    </style>
+
+</head>
+
+<body>
+
+  <div id="article-header"></div>
+
+   
+
+  <main class="article-page">
+    <div class="article-container">
+      <article class="article-card">
+
+        <p class="article-kicker">Muestra</p>
+
+        <h1 class="article-title">
+          Portaminas "Expansión"
+        </h1>
+
+        <p class="article-author">
+          Coliqueo Lola
+        </p>
+
+        <div class="article-meta" aria-label="Datos de la propuesta">
+          <div class="meta-item">
+            <span class="meta-label">Muestra</span>
+            <span class="meta-value">Diseño y Tecnología Situada</span>
+          </div>
+
+          <div class="meta-item">
+            <span class="meta-label">Asignatura</span>
+            <span class="meta-value">Taller de Diseño Industrial IV - Orientación Máquinas y Herramientas</span>
+          </div>
+
+          <div class="meta-item">
+            <span class="meta-label">Docentes</span>
+            <span class="meta-value">Pablo López, Diego López, Guillermo Dini y Federico Enríquez</span>
+          </div>
+
+          <div class="meta-item">
+            <span class="meta-label">Técnica</span>
+            <span class="meta-value">Modelado 3D e impresión 3D FDM en PLA</span>
+          </div>
+        </div>
+
+        <div class="article-divider"></div>
+
+        <p class="article-intro">
+          Expansión es un portaminas de 5,6 mm cuya forma nace del gesto de dibujar y de las zonas de presión que genera la mano durante el bocetado.
+        </p>
+
+        <nav class="article-index" aria-label="Índice del artículo">
+          <h2>Índice</h2>
+          <ul>
+            <li><a href="#propuesta">La propuesta Expansión</a></li>
+            <li><a href="#gesto">El gesto de dibujar</a></li>
+            <li><a href="#morfologia">Morfología, ergonomía y mecanismo</a></li>
+            <li><a href="#tecnica">Técnica, materiales y procedimiento</a></li>
+            <li><a href="#reflexion">Reflexión de la actividad</a></li>
+            <li><a href="#galeria">Galería del portaminas</a></li>
+          </ul>
+        </nav>
+
+        <div class="article-content">
+
+          <section id="propuesta" class="article-section">
+            <h2>La propuesta Expansión</h2>
+
+            <p>
+              El proyecto Expansión surge a partir del análisis del gesto de dibujar durante el bocetado. Se observó que, al utilizar un portaminas de 5,6 mm, la mano genera zonas de presión y curvas particulares que se repiten de manera constante.
+            </p>
+
+            <p>
+              En lugar de diseñar un objeto con una forma arbitraria, se propuso que su morfología naciera directamente de esa relación entre la mano y la herramienta.
+            </p>
+          </section>
+
+          <section id="gesto" class="article-section">
+            <h2>El gesto de dibujar</h2>
+
+            <p>
+              La intención fue desarrollar un portaminas que funcionara como una extensión natural de la mano, mejorando la comodidad durante largas jornadas de dibujo y facilitando el control del trazo.
+            </p>
+
+            <p>
+              El proyecto busca transmitir precisión, organicidad y continuidad entre el usuario y el producto, permitiendo que la forma acompañe el gesto de dibujar.
+            </p>
+          </section>
+
+          <section id="morfologia" class="article-section">
+            <h2>Morfología, ergonomía y mecanismo</h2>
+
+            <p>
+              El resultado es un portaminas ergonómico cuya identidad formal expresa el movimiento de la mano durante el bocetado y convierte ese gesto en el principal recurso de diseño.
+            </p>
+
+            <p>
+              El mecanismo se resolvió mediante un sistema simple de rosca y mandril a presión, evitando mecanismos complejos e innecesarios para este tipo de herramienta.
+            </p>
+
+            <p>
+              La geometría también fue pensada para optimizar la fabricación mediante impresión 3D, reduciendo soportes, simplificando las piezas y facilitando el montaje.
+            </p>
+          </section>
+
+          <section id="tecnica" class="article-section">
+            <h2>Técnica, materiales y procedimiento</h2>
+
+            <p>
+              El portaminas fue diseñado mediante modelado 3D e impreso utilizando tecnología FDM en PLA.
+            </p>
+
+            <p>
+              Durante el desarrollo se consideraron espesores adecuados y tolerancias de aproximadamente 0,2 mm para resolver el ajuste de las piezas, el funcionamiento del mecanismo y el montaje del prototipo.
+            </p>
+          </section>
+
+          <section id="reflexion" class="article-section">
+            <h2>Reflexión de la actividad</h2>
+
+            <div class="quote-box">
+              El resultado final demuestra que es posible integrar ergonomía, funcionalidad y fabricación digital en un objeto simple.
+            </div>
+
+            <p>
+              Este proyecto permitió comprender la importancia de diseñar a partir del análisis del usuario y de su forma de interactuar con el producto. La propuesta buscó que la morfología surgiera del gesto de uso, logrando una herramienta más cómoda e intuitiva.
+            </p>
+
+            <p>
+              Asimismo, la actividad permitió profundizar en las posibilidades y limitaciones de la fabricación mediante impresión 3D, entendiendo cómo las decisiones formales también influyen en la producción.
+            </p>
+          </section>
+
+          <section id="galeria" class="gallery-box">
+            <h2>Galería del portaminas</h2>
+
+            <div class="gallery-grid">
+              <figure class="gallery-item">
+                <img src="assets/images/coliqueo-lola-01-producto-completo-original.jpg" alt="Vista lateral del portaminas Expansión" />
+                <figcaption>Producto completo</figcaption>
+              </figure>
+
+              <figure class="gallery-item">
+                <img src="assets/images/coliqueo-lola-02-modo-de-uso-original.jpg" alt="Portaminas Expansión sostenido durante el dibujo" />
+                <figcaption>Modo de uso</figcaption>
+              </figure>
+
+              <figure class="gallery-item">
+                <img src="assets/images/coliqueo-lola-03-bocetos-original.jpg" alt="Bocetos de exploración formal y ergonómica" />
+                <figcaption>Bocetos del proceso</figcaption>
+              </figure>
+
+              <figure class="gallery-item">
+                <img src="assets/images/coliqueo-lola-04-modelado-3d-original.jpg" alt="Modelado tridimensional del portaminas Expansión" />
+                <figcaption>Modelado 3D</figcaption>
+              </figure>
+
+              <figure class="gallery-item">
+                <img src="assets/images/coliqueo-lola-05-detalle-mecanismo-original.jpg" alt="Detalle del mandril y la pieza desmontada" />
+                <figcaption>Detalle del mecanismo</figcaption>
+              </figure>
+            </div>
+
+            <div class="student-box">
+              <img src="assets/images/coliqueo-lola-06-retrato-original.jpg" alt="Retrato de Coliqueo Lola" class="student-photo" />
+              <p>
+                Propuesta realizada por Coliqueo Lola en el marco de Taller de Diseño Industrial IV - Orientación Máquinas y Herramientas, de la Licenciatura en Diseño Industrial UNLa, junto con el LAD (Laboratorio de Diseño).
+              </p>
+            </div>
+          </section>
+
+        </div>
+
+        <div class="article-actions">
+          <button class="article-button" type="button" onclick="window.print()">
+            Imprimir / Guardar PDF
+          </button>
+        </div>
+
+      </article>
+    </div>
+  </main>
+
+<script src="js/components.js?v=2"></script>
+
+  <script>
+    document.querySelectorAll('a[href^="#"]').forEach(function (link) {
+      link.addEventListener("click", function (event) {
+        var target = document.querySelector(this.getAttribute("href"));
+        if (!target) return;
+
+        event.preventDefault();
+        target.scrollIntoView({
+          behavior: "smooth",
+          block: "start"
+        });
+      });
+    });
+  </script>
+</body>
+</html>
+
